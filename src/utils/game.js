@@ -29,6 +29,12 @@ export const BoardGeneration = (lx, ly) => {
   return board;
 };
 
+/**
+ * Generate a random position within the bounds of the map
+ * @param lx - The length of the board in the x direction.
+ * @param ly - The height of the map.
+ * @returns An object with two properties, rx and ry.
+ */
 export const RandomPlayerPosition = (lx, ly) => {
   const rx = RandomNumber(0, lx - 1);
   const ry = RandomNumber(0, ly - 1);
@@ -50,6 +56,15 @@ export const RandomMove = (positionXY, lx, ly) => {
   return moves[rn];
 };
 
+/**
+ * Given a list of x coordinates and a list of y coordinates, return the number of moves that can be
+ * made
+ * @param xs - the current x position of the player
+ * @param ys - the current y-coordinate of the player
+ * @param lx - length of the board
+ * @param ly - the length of the y-axis
+ * @returns The number of moves that can be made.
+ */
 export const CanMove = (xs, ys, lx, ly) => {
   let moves = 0;
   if (left(xs)) moves++;
@@ -59,26 +74,56 @@ export const CanMove = (xs, ys, lx, ly) => {
   return moves;
 };
 
+/**
+ * Given a number, return true if the number is greater than 0
+ * @param xs - the number of times the function has been called
+ * @returns A boolean value.
+ */
 const left = (xs) => {
   if (xs > 0) return true;
   return false;
 };
 
+/**
+ * Given a list of numbers and a number, return true if the list of numbers is sorted in descending
+ * order
+ * @param xs - the current list of numbers
+ * @param lx - the left-most x coordinate
+ * @returns Nothing.
+ */
 const right = (xs, lx) => {
   if (xs < lx) return true;
   return false;
 };
 
+/**
+ * Returns true if the y-coordinate of the point is greater than 0
+ * @param ys - the current y value
+ * @param ly - the last y value
+ */
 const up = (ys, ly) => {
   if (ys > 0) return true;
   return false;
 };
 
+/**
+ * Given a list of y-values and a lower y-value, return true if all y-values are less than the lower
+ * y-value
+ * @param ys - the current y value
+ * @param ly - the last y value
+ * @returns a boolean value.
+ */
 const down = (ys, ly) => {
   if (ys < ly) return true;
   return false;
 };
 
+/**
+ * Generate a random number between min and max
+ * @param min - The minimum value that can be generated.
+ * @param max - The maximum value that can be generated.
+ * @returns A random number between the min and max values.
+ */
 export const RandomNumber = (min, max) => {
   const gen = rn.generator({
     min,
