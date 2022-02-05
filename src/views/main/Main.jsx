@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BoardGeneration, RandomPlayerPosition } from "../../utils/game";
-import { index } from "mathjs";
+import {
+  BoardGeneration,
+  FromMatrixToArray,
+  RandomMove,
+  RandomPlayerPosition,
+} from "../../utils/game";
+import { index, subset, matrix } from "mathjs";
 
 import PropTypes from "prop-types";
 
@@ -8,7 +13,11 @@ import "./style.scss";
 
 const Main = (props) => {
   const { lx, ly } = props;
-  const [arrayMatrix, setArrayMatrix] = useState([]);
+  const [board, setBoard] = useState(BoardGeneration(lx, ly));
+  const [playerPosition, setPlayerPosition] = useState(
+    RandomPlayerPosition(lx, ly)
+  );
+  const [lastPlayerPosition, setLastPlayerPosition] = useState({});
 
   const getCellColor = (row, column) => {
     // bad-cell
@@ -24,30 +33,35 @@ const Main = (props) => {
   };
 
   useEffect(() => {
-    const board = BoardGeneration(lx, ly);
-    const playerPosition = RandomPlayerPosition(lx, ly);
-    let xs = 0;
-    const matrix = [];
-    let row = [];
-    console.log(playerPosition);
-    board.subset(index(playerPosition.rx, playerPosition.ry), 1);
-    board.forEach((value, index, board) => {
-      if (xs < lx) {
-        row.push(value);
-        ++xs;
-      } else {
-        matrix.push(row);
-        row = [];
-        xs = 0;
-      }
-    });
-    setArrayMatrix(matrix);
+    setBoard(BoardGeneration(lx, ly));
+    setPlayerPosition(RandomPlayerPosition(lx, ly));
   }, [lx, ly]);
+
+  useEffect(() => {
+    if (playerPosition.rx) {
+      const newBoard = board;
+      if (lastPlayerPosition.rx)
+        newBoard[lastPlayerPosition.rx][lastPlayerPosition.ry] = 0;
+      newBoard[playerPosition.rx][playerPosition.ry] = 1;
+      setBoard(newBoard);
+    }
+  }, [playerPosition]);
+
+  useEffect(() => {
+    console.log(playerPosition);
+    setInterval(() => {
+      if (playerPosition.rx)
+        if (playerPosition !== lastPlayerPosition) {
+          setLastPlayerPosition(playerPosition);
+          setPlayerPosition(RandomMove(playerPosition, lx, ly));
+        }
+    }, 10000);
+  }, []);
 
   return (
     <div className="main-screen">
       <table className="board dark-scroll">
-        {arrayMatrix.map((row, index) => {
+        {board.map((row, index) => {
           return (
             <tr key={`row${index}`}>
               {row.map((item, jndex) => {
@@ -57,7 +71,7 @@ const Main = (props) => {
                       className={getCellColor(index, jndex)}
                       key={`cell${jndex}`}
                     >
-                      {item !== 1 ? item : "X"}
+                      {item !== 1 ? item : <span className="position">o</span>}
                     </button>
                   </td>
                 );
