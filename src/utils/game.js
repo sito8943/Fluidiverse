@@ -1,4 +1,4 @@
-import { zeros } from "mathjs";
+// import { zeros } from "mathjs";
 import rn from "random-number";
 
 export const FromMatrixToArray = (matrix, lx, ly) => {
@@ -49,10 +49,7 @@ export const RandomMove = (positionXY, lx, ly) => {
   if (up(ry)) moves.push({ rx, ry: ry - 1 }); // up
   if (down(ry, ly)) moves.push({ rx, ry: ry + 1 }); // down
   let rn = RandomNumber(0, moves.length - 1);
-  // while (moves[rn] !== positionXY) rn = RandomNumber(0, moves.length - 1);
-  console.log(moves);
-  console.log(positionXY);
-  console.log(moves[rn]);
+  if (moves.length === 1) return moves[0];
   return moves[rn];
 };
 

@@ -5,7 +5,7 @@ import {
   RandomMove,
   RandomPlayerPosition,
 } from "../../utils/game";
-import { index, subset, matrix } from "mathjs";
+// import { index, subset, matrix } from "mathjs";
 
 import PropTypes from "prop-types";
 
@@ -13,10 +13,9 @@ import "./style.scss";
 
 const Main = (props) => {
   const { lx, ly } = props;
-  const [board, setBoard] = useState(BoardGeneration(lx, ly));
-  const [playerPosition, setPlayerPosition] = useState(
-    RandomPlayerPosition(lx, ly)
-  );
+  const [board, setBoard] = useState([]);
+  const [steps, setSteps] = useState([]);
+  const [playerPosition, setPlayerPosition] = useState({});
   const [lastPlayerPosition, setLastPlayerPosition] = useState({});
 
   const getCellColor = (row, column) => {
@@ -34,32 +33,36 @@ const Main = (props) => {
 
   useEffect(() => {
     setBoard(BoardGeneration(lx, ly));
-    setPlayerPosition(RandomPlayerPosition(lx, ly));
-  }, [lx, ly]);
+    setTimeout(() => {
+      setPlayerPosition({ rx: 1, ry: 1 } /*RandomPlayerPosition(lx, ly)*/);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
+    console.log("hola");
     if (playerPosition.rx) {
       const newBoard = board;
       if (lastPlayerPosition.rx)
         newBoard[lastPlayerPosition.rx][lastPlayerPosition.ry] = 0;
       newBoard[playerPosition.rx][playerPosition.ry] = 1;
+      const newSteps = steps;
+      newSteps.push(playerPosition);
+      setSteps(newSteps);
       setBoard(newBoard);
     }
   }, [playerPosition]);
 
   useEffect(() => {
-    console.log(playerPosition);
     setInterval(() => {
-      if (playerPosition.rx)
-        if (playerPosition !== lastPlayerPosition) {
-          setLastPlayerPosition(playerPosition);
-          setPlayerPosition(RandomMove(playerPosition, lx, ly));
-        }
+      if (playerPosition.rx) {
+        setLastPlayerPosition(playerPosition);
+        setPlayerPosition(RandomMove(playerPosition, lx, ly));
+      }
     }, 10000);
   }, []);
 
   return (
-    <div className="main-screen">
+    <div className="main-screen" style={{ display: "flex" }}>
       <table className="board dark-scroll">
         {board.map((row, index) => {
           return (
@@ -80,6 +83,13 @@ const Main = (props) => {
           );
         })}
       </table>
+      <div>
+        <ul>
+          {steps.map((item, i) => {
+            return <li key={`li${i}`}>{`${item.rx}, ${item.ry}`}</li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
