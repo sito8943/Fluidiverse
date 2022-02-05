@@ -9596,6 +9596,11 @@ raf@^3.4.1:
   dependencies:
     performance-now "^2.1.0"
 
+random-number@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/random-number/-/random-number-0.0.9.tgz#5907b96f05041807c52aed601c869524d86fbbd5"
+  integrity sha512-ipG3kRCREi/YQpi2A5QGcvDz1KemohovWmH6qGfboVyyGdR2t/7zQz0vFxrfxpbHQgPPdtVlUDaks3aikD1Ljw==
+
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
