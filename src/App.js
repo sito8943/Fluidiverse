@@ -8,7 +8,6 @@ import User from "./models/User";
 
 import { GetTexts } from "./lang/texts";
 
-import Notification from "./components/notification/Notification";
 import Loading from "./components/loading/Loading";
 import Navbar from "./components/navbar/Navbar";
 
@@ -53,7 +52,6 @@ const App = () => {
         <Loading type="big" />
       ) : (
         <Router>
-          <Notification texts={GetTexts(contextState.lang, "Notification")} />
           <Routes>
             <Route
               exact
