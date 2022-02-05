@@ -8,14 +8,11 @@ import User from "./models/User";
 
 import { GetTexts } from "./lang/texts";
 
-import Notification from "./components/notification/Notification";
 import Loading from "./components/loading/Loading";
 import Navbar from "./components/navbar/Navbar";
 
 import Login from "./views/login/Login";
 import Main from "./views/main/Main";
-
-import "uikit/dist/css/uikit.min.css";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -53,7 +50,6 @@ const App = () => {
         <Loading type="big" />
       ) : (
         <Router>
-          <Notification texts={GetTexts(contextState.lang, "Notification")} />
           <Routes>
             <Route
               exact
