@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import User from "./models/User";
 
-import { colors } from "./utils/colors";
 import { GetTexts } from "./lang/texts";
 
 import Notification from "./components/notification/Notification";
@@ -14,11 +13,7 @@ import Loading from "./components/loading/Loading";
 import Navbar from "./components/navbar/Navbar";
 
 import Login from "./views/login/Login";
-import SignUp from "./views/signup/SignUp";
 import Main from "./views/main/Main";
-import NotMatch from "./views/notmatch/NotMatch";
-import Forgot from "./views/forgot/Forgot";
-import Account from "./views/account/Account";
 
 import "uikit/dist/css/uikit.min.css";
 
@@ -53,16 +48,7 @@ const App = () => {
   }, []);
 
   return (
-    <div
-      id="main-back"
-      className="main-background"
-      style={{
-        backgroundColor:
-          contextState.mode === "light"
-            ? colors.LightMainBackground
-            : colors.DarkMainBackground,
-      }}
-    >
+    <div id="main-back" className="main-background">
       {loading ? (
         <Loading type="big" />
       ) : (
@@ -86,35 +72,10 @@ const App = () => {
                       <Login texts={GetTexts(contextState.lang, "Login")} />
                     }
                   />
-                  <Route
-                    path="signup"
-                    element={
-                      <SignUp texts={GetTexts(contextState.lang, "SignUp")} />
-                    }
-                  />
-                  <Route
-                    path="forgot"
-                    element={
-                      <Forgot texts={GetTexts(contextState.lang, "Forgot")} />
-                    }
-                  />
                 </>
               ) : (
-                <>
-                  <Route
-                    path="account"
-                    element={
-                      <Account texts={GetTexts(contextState.lang, "Account")} />
-                    }
-                  />
-                </>
+                <></>
               )}
-              <Route
-                path="*"
-                element={
-                  <NotMatch texts={GetTexts(contextState.lang, "NotMatch")} />
-                }
-              />
             </Route>
           </Routes>
         </Router>
