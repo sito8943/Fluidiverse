@@ -1,0 +1,22 @@
+.main-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .board {
+    button {
+      width: 60px;
+      height: 60px;
+      border: none;
+    }
+
+    .good-cell {
+      background-color: rgba(30, 143, 255, 0.452);
+    }
+
+    .bad-cell {
+      background-color: rgba(15, 76, 138, 0.452);
+    }
+  }
+}
