@@ -5,8 +5,10 @@ import PropTypes from "prop-types";
 // styles
 import "./style.scss";
 
+const unitsType = ["nothing", "player", "planet", "dark-hole", "star"];
+
 const Cell = (props) => {
-  const { x, y, value } = props;
+  const { x, y, unit } = props;
 
   const getCellColor = () => {
     // bad-cell
@@ -22,15 +24,23 @@ const Cell = (props) => {
   };
   return (
     <button className={`cell ${getCellColor(x, y)}`} key={`cell${x}`}>
-      {value !== 1 ? value : <span className="position">o</span>}
+      {unit.value === 0 ? (
+        unit.value
+      ) : (
+        <img className={unitsType[unit.type]} src={unit.img} alt={unit.name} />
+      )}
     </button>
   );
+};
+
+Cell.defaultProps = {
+  unit: { value: 0 },
 };
 
 Cell.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+  unit: PropTypes.object,
 };
 
 export default Cell;

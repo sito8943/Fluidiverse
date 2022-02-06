@@ -35,7 +35,7 @@ export const BoardGeneration = (lx, ly) => {
  * @param ly - The height of the map.
  * @returns An object with two properties, rx and ry.
  */
-export const RandomPlayerPosition = (lx, ly) => {
+export const RandomPosition = (lx, ly) => {
   const rx = RandomNumber(0, lx - 1);
   const ry = RandomNumber(0, ly - 1);
   return { rx, ry };
