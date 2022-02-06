@@ -1,0 +1,25 @@
+.card {
+  background: #222333cc;
+  width: 300px;
+  padding: 20px;
+  border-radius: 1rem;
+  display: flex;
+
+  h3 {
+    color: aliceblue;
+  }
+
+  p {
+    color: rgb(138, 138, 138);
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.vertical {
+  flex-direction: column;
+  align-items: center;
+}

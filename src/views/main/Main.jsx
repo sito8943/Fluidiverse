@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Board from "../../components/board/Board";
-import { BoardGeneration, RandomMove, RandomPosition } from "../../utils/game";
+import { RandomPosition } from "../../utils/game";
 // import { index, subset, matrix } from "mathjs";
 
 // img
@@ -10,6 +10,9 @@ import p3 from "../../sprites/p3.gif";
 import p4 from "../../sprites/p4.gif";
 import dh1 from "../../sprites/dh1.gif";
 import st1 from "../../sprites/st1.gif";
+
+// components
+import Card from "../../components/card/Card";
 
 // styles
 import "./style.scss";
@@ -73,6 +76,20 @@ const Main = (props) => {
       <div>
         <button onClick={generate}>Hola</button>
       </div>
+
+      <Card>
+        <img src={p1} alt="planeta1" />
+        <div>
+          <h3>Planeta 1</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad aut eum
+            obcaecati tempore voluptates facere blanditiis aliquid quam, officia
+            odit quibusdam consectetur maxime, illo ut labore numquam velit
+            minima deleniti.
+          </p>
+          <button className="button ghost ease-transition">Hola</button>
+        </div>
+      </Card>
 
       {generated && <Board units={planets} lx={10} ly={10} />}
 

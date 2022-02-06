@@ -1,0 +1,20 @@
+.button {
+  cursor: pointer;
+}
+
+.ghost {
+  padding: 5px 20px;
+  border: 1px dashed aliceblue;
+  background: none;
+  color: aliceblue;
+  border-radius: 1rem;
+
+  &:hover {
+    background: aliceblue;
+    color: #222333;
+  }
+}
+
+.ease-transition {
+  transition: all 200ms ease;
+}

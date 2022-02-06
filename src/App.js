@@ -14,6 +14,9 @@ import Navbar from "./components/navbar/Navbar";
 import Login from "./views/login/Login";
 import Main from "./views/main/Main";
 
+// styles
+import "./assets/theme.scss";
+
 const App = () => {
   const [loading, setLoading] = useState(true);
   const { contextState, setContextState } = useContext();
