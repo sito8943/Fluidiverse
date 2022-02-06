@@ -10,7 +10,7 @@ import "./style.scss";
 const StaticUnitCard = (props) => {
   const { type, img, name, description } = props;
   return (
-    <Card>
+    <Card className="card vertical absolute">
       <img src={img} alt={name} />
       <div>
         <h3>{name}</h3>

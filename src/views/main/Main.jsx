@@ -72,12 +72,8 @@ const Main = (props) => {
   }, [playerPosition]);
 
   return (
-    <div className="main-screen" style={{ display: "flex" }}>
-      <div>
-        <button onClick={generate}>Hola</button>
-      </div>
-
-      <Card>
+    <>
+      <Card className="card vertical absolute">
         <img src={p1} alt="planeta1" />
         <div>
           <h3>Planeta 1</h3>
@@ -90,17 +86,22 @@ const Main = (props) => {
           <button className="button ghost ease-transition">Hola</button>
         </div>
       </Card>
+      <div className="main-screen" style={{ display: "flex" }}>
+        <div>
+          <button onClick={generate}>Hola</button>
+        </div>
 
-      {generated && <Board units={planets} lx={10} ly={10} />}
+        {generated && <Board units={planets} lx={10} ly={10} />}
 
-      <div>
-        <ul>
-          {steps.map((item, i) => {
-            return <li key={`li${i}`}>{`${item.rx}, ${item.ry}`}</li>;
-          })}
-        </ul>
+        <div>
+          <ul>
+            {steps.map((item, i) => {
+              return <li key={`li${i}`}>{`${item.rx}, ${item.ry}`}</li>;
+            })}
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
