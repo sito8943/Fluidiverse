@@ -1,13 +1,22 @@
 import React, { forwardRef } from "react";
+import { useDrag } from "react-dnd";
 import PropTypes from "prop-types";
 
 // style
 import "./style.scss";
 
 const Card = forwardRef((props, ref) => {
+  const [{ opacity }, dragRef] = useDrag(
+    () => ({
+      collect: (monitor) => ({
+        opacity: monitor.isDragging() ? 0.5 : 1,
+      }),
+    }),
+    []
+  );
   const { id, className, style, children } = props;
   return (
-    <div ref={ref} id={id} className={className} style={style}>
+    <div ref={dragRef} id={id} className={className} style={style}>
       {children}
     </div>
   );

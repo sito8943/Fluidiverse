@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Board from "../../components/board/Board";
-import { RandomPosition } from "../../utils/game";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 // import { index, subset, matrix } from "mathjs";
 
 // img
@@ -18,11 +18,16 @@ import st1 from "../../sprites/st1.gif";
 // context
 import { useUnitCard } from "../../context/UnitCard";
 
+// functions
+import { RandomPosition } from "../../utils/game";
+
 // components
 import StaticUnitCard from "../../components/card/StaticUnitCard";
+import Board from "../../components/board/Board";
 
 // styles
 import "./style.scss";
+import { forwardRef } from "react";
 
 const units = [
   {
@@ -107,7 +112,7 @@ const units = [
   },
 ];
 
-const Main = (props) => {
+const Main = forwardRef((props, ref) => {
   const { unitCardState, setUnitCardState } = useUnitCard();
 
   const [steps, setSteps] = useState([]);
@@ -146,25 +151,54 @@ const Main = (props) => {
   }, [playerPosition]);
 
   return (
-    <>
-      <StaticUnitCard useCardContext />
-      <div className="main-screen" style={{ display: "flex" }}>
-        <div>
-          <button onClick={generate}>Hola</button>
-        </div>
+    <div>
+      <DragDropContext
+        onDragEnd={(result) => {
+          const { source, destination } = result;
+          if (!destination) return;
+          if (
+            source.index === destination.index &&
+            source.droppableId === destination.id
+          )
+            return;
+          console.log(result);
+        }}
+      >
+        <Droppable droppableId="board">
+          {(provided, snapshot) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <Draggable draggableId="staticCard" index={0}>
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <div>
+                      <button onClick={generate}>Hola</button>
+                    </div>
+                  </div>
+                )}
+              </Draggable>
 
-        {generated && <Board units={planets} lx={10} ly={10} />}
-
-        <div>
-          <ul>
-            {steps.map((item, i) => {
-              return <li key={`li${i}`}>{`${item.rx}, ${item.ry}`}</li>;
-            })}
-          </ul>
-        </div>
-      </div>
-    </>
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </div>
   );
-};
+});
 
 export default Main;
+
+/* <StaticUnitCard useCardContext />
+      <div className="main-screen" style={{ display: "flex" }}></div>
+      <div>
+        <ul>
+          {steps.map((item, i) => {
+            return <li key={`li${i}`}>{`${item.rx}, ${item.ry}`}</li>;
+          })}
+        </ul>
+      </div>
+      {generated && <Board units={planets} lx={10} ly={10} />} */

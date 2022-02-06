@@ -43,6 +43,10 @@ const StaticUnitCard = (props) => {
     showOff();
   };
 
+  const travelTo = () => {
+    showOff();
+  };
+
   useEffect(() => {
     if (useCardContext) {
       const { type, img, name, description } = unitCardState;
@@ -62,7 +66,7 @@ const StaticUnitCard = (props) => {
     <Card
       className="card vertical absolute ease-transition"
       style={{
-        backgroundImage: `url(${back})`,
+        backgroundColor: "#222333cc",
         opacity: unitCardState.opacity,
         zIndex: unitCardState.opacity ? 1 : -1,
       }}
@@ -81,7 +85,9 @@ const StaticUnitCard = (props) => {
       <div className="text-container">
         <h3>{nameState}</h3>
         <p>{descriptionState}</p>
-        <button className="button ghost ease-transition">Viajar</button>
+        <button className="button ghost ease-transition" onClick={travelTo}>
+          Viajar
+        </button>
       </div>
     </Card>
   );
