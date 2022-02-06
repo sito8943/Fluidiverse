@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Board from "../../components/board/Board";
+
 import { RandomPosition } from "../../utils/game";
 // import { index, subset, matrix } from "mathjs";
 
@@ -17,9 +17,14 @@ import st1 from "../../sprites/st1.gif";
 
 // context
 import { useUnitCard } from "../../context/UnitCard";
+import { useRightSidebar } from "../../context/RightSidebarProvider";
 
 // components
 import StaticUnitCard from "../../components/card/StaticUnitCard";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Board from "../../components/board/Board";
+
+import back from "../../sprites/SpaceBackground.png";
 
 // styles
 import "./style.scss";
@@ -109,6 +114,7 @@ const units = [
 
 const Main = (props) => {
   const { unitCardState, setUnitCardState } = useUnitCard();
+  const { rightSidebarState, setRightSidebarState } = useRightSidebar();
 
   const [steps, setSteps] = useState([]);
   const [planets, setPlanets] = useState([]);
@@ -131,11 +137,12 @@ const Main = (props) => {
 
   useEffect(() => {
     console.log("main", unitCardState);
-    if (unitCardState.id) {
+    if (unitCardState.id && unitCardState.visible) {
       const { type, img, name, description } =
         units[unitCardState.id.substring(1)];
       setUnitCardState({ type: "set", typeA: type, img, name, description });
-    }
+      setRightSidebarState({ type: "show" });
+    } else setRightSidebarState({ type: "hide" });
   }, [unitCardState.visible]);
 
   useEffect(() => {
@@ -146,24 +153,30 @@ const Main = (props) => {
   }, [playerPosition]);
 
   return (
-    <>
-      <StaticUnitCard useCardContext />
+    <div
+      style={{
+        backgroundImage: `url(${back})`,
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
       <div className="main-screen" style={{ display: "flex" }}>
         <div>
           <button onClick={generate}>Hola</button>
-        </div>
-
-        {generated && <Board units={planets} lx={10} ly={10} />}
-
-        <div>
           <ul>
             {steps.map((item, i) => {
               return <li key={`li${i}`}>{`${item.rx}, ${item.ry}`}</li>;
             })}
           </ul>
         </div>
+
+        {generated && <Board units={planets} lx={10} ly={10} />}
+
+        <Sidebar>
+          <StaticUnitCard useCardContext />
+        </Sidebar>
       </div>
-    </>
+    </div>
   );
 };
 
