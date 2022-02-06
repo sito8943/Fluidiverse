@@ -24,6 +24,22 @@
     padding: 0 10px 10px 10px;
     border-radius: 1rem;
   }
+
+  .close-container {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    position: absolute;
+    padding-right: 20px;
+    margin-top: -10px;
+
+    button {
+      background: none;
+      border: none;
+      color: aliceblue;
+      cursor: pointer;
+    }
+  }
 }
 
 .vertical {

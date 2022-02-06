@@ -31,6 +31,7 @@ const Board = (props) => {
   const showCard = (e) => {
     let node = e.target;
     if (node.nodeName.toLowerCase() === "img") node = node.parentNode;
+    console.log(node.name);
     setUnitCardState({ type: "show", id: node.name });
   };
 

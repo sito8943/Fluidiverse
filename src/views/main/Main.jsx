@@ -8,6 +8,10 @@ import p1 from "../../sprites/p1.gif";
 import p2 from "../../sprites/p2.gif";
 import p3 from "../../sprites/p3.gif";
 import p4 from "../../sprites/p4.gif";
+import p5 from "../../sprites/p5.gif";
+import p6 from "../../sprites/p6.gif";
+import as1 from "../../sprites/as1.gif";
+import as2 from "../../sprites/as2.gif";
 import dh1 from "../../sprites/dh1.gif";
 import st1 from "../../sprites/st1.gif";
 
@@ -55,17 +59,49 @@ const units = [
   },
   {
     id: 4,
-    type: 3,
-    img: dh1,
+    type: 2,
+    img: p5,
     name: "Planeta 5",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
   },
   {
     id: 5,
+    type: 2,
+    img: p6,
+    name: "Planeta 6",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
+  },
+  {
+    id: 6,
+    type: 3,
+    img: dh1,
+    name: "Agujero Negro",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
+  },
+  {
+    id: 7,
     type: 4,
     img: st1,
-    name: "Planeta 6",
+    name: "Estrella",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
+  },
+  {
+    id: 8,
+    type: 4,
+    img: as1,
+    name: "Asteroide 1",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
+  },
+  {
+    id: 9,
+    type: 4,
+    img: as2,
+    name: "Asteroide 2",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
   },
@@ -94,6 +130,7 @@ const Main = (props) => {
   };
 
   useEffect(() => {
+    console.log("main", unitCardState);
     if (unitCardState.id) {
       const { type, img, name, description } =
         units[unitCardState.id.substring(1)];
@@ -110,7 +147,7 @@ const Main = (props) => {
 
   return (
     <>
-      {unitCardState.type ? <StaticUnitCard useCardContext /> : <></>}
+      <StaticUnitCard useCardContext />
       <div className="main-screen" style={{ display: "flex" }}>
         <div>
           <button onClick={generate}>Hola</button>

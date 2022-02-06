@@ -13,6 +13,7 @@ import back from "../../sprites/SpaceBackground.png";
 
 // style
 import "./style.scss";
+import { XIcon } from "../../icons/icons";
 
 const StaticUnitCard = (props) => {
   const { type, img, name, description, useCardContext } = props;
@@ -24,30 +25,55 @@ const StaticUnitCard = (props) => {
   const [descriptionState, setDescriptionState] = useState(0);
 
   const ref = useOnclickOutside(() => {
-    setUnitCardState({ type: "reset" });
+    showOff();
   });
+
+  const showOff = () => {
+    console.log("card", unitCardState);
+    if (unitCardState.opacity > 0) {
+      setUnitCardState({ type: "hide" });
+
+      setTimeout(() => {
+        setUnitCardState({ type: "reset" });
+      }, 400);
+    }
+  };
+
+  const closeButton = () => {
+    showOff();
+  };
 
   useEffect(() => {
     if (useCardContext) {
-      setTypeState(unitCardState.type);
-      setImgState(unitCardState.img);
-      setNameState(unitCardState.name);
-      setDescriptionState(unitCardState.description);
+      const { type, img, name, description } = unitCardState;
+      setTypeState(type);
+      setImgState(img);
+      setNameState(name);
+      setDescriptionState(description);
+    } else {
+      setTypeState(type);
+      setImgState(img);
+      setNameState(name);
+      setDescriptionState(description);
     }
-  }, [
-    useCardContext,
-    unitCardState.type,
-    unitCardState.img,
-    unitCardState.name,
-    unitCardState.description,
-  ]);
+  }, [useCardContext, unitCardState, img, type, name, description]);
 
   return (
     <Card
-      className="card vertical absolute"
-      style={{ backgroundImage: `url(${back})` }}
-      ref={ref}
+      className="card vertical absolute ease-transition"
+      style={{
+        backgroundImage: `url(${back})`,
+        opacity: unitCardState.opacity,
+        zIndex: unitCardState.opacity ? 1 : -1,
+      }}
+      ref={unitCardState.opacity > 0 ? ref : null}
     >
+      <div className="close-container">
+        <button onClick={closeButton}>
+          <XIcon />
+        </button>
+      </div>
+
       <div>
         <img src={imgState} alt={nameState} />
       </div>
@@ -55,7 +81,7 @@ const StaticUnitCard = (props) => {
       <div className="text-container">
         <h3>{nameState}</h3>
         <p>{descriptionState}</p>
-        <button className="button ghost ease-transition">Hola</button>
+        <button className="button ghost ease-transition">Viajar</button>
       </div>
     </Card>
   );

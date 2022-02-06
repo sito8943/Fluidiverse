@@ -6,19 +6,31 @@ const unitCardReducer = (unitCardState, action) => {
   switch (action.type) {
     case "reset":
       return {
+        opacity: 0,
         visible: false,
         type: 0,
         img: "",
         name: "",
         description: "",
       };
+    case "hide":
+      return {
+        opacity: 0,
+        visible: unitCardState.visible,
+        type: unitCardState.type,
+        img: unitCardState.img,
+        name: unitCardState.name,
+        description: unitCardState.description,
+      };
     case "show":
       return {
+        opacity: 0,
         id: action.id,
         visible: true,
       };
     case "set":
       return {
+        opacity: 1,
         visible: true,
         type: action.typeA,
         img: action.img,
@@ -32,6 +44,7 @@ const unitCardReducer = (unitCardState, action) => {
 
 const UnitCardProvider = ({ children }) => {
   const [unitCardState, setUnitCardState] = React.useReducer(unitCardReducer, {
+    opacity: 0,
     visible: false,
     type: 0,
     img: "",
