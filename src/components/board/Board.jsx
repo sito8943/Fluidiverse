@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 // functions
 import { BoardGeneration } from "../../utils/game";
 
+// context
+import { useUnitCard } from "../../context/UnitCard";
+
 // style
 import "./style.scss";
 
@@ -12,6 +15,7 @@ import Cell from "../cell/Cell";
 
 const Board = (props) => {
   const { lx, ly, units } = props;
+  const { unitCardState, setUnitCardState } = useUnitCard();
 
   const [board, setBoard] = useState(BoardGeneration(lx, ly));
   const [staticUnits, setStaticUnits] = useState([]);
@@ -45,6 +49,8 @@ const Board = (props) => {
                   value={item}
                   unit={existUnitIn(index, jndex)}
                   key={`cell${jndex}`}
+                  onMouseEnter={} 
+                  onMouseLeave={}
                 />
               );
             })}
