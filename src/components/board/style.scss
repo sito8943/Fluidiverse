@@ -1,0 +1,14 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 80px);
+  grid-template-rows: repeat(10, 80px);
+  width: 801px;
+  height: 801px;
+  background-color: dodgerblue;
+
+  .position {
+    background-color: crimson;
+    color: crimson;
+    font-size: 36px;
+  }
+}

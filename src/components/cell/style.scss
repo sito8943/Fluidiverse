@@ -1,0 +1,17 @@
+.board {
+  .cell {
+    width: 80px;
+    height: 80px;
+    display: grid;
+    place-content: center;
+    border: none;
+  }
+
+  .good-cell {
+    background-color: rgba(30, 143, 255, 0.452);
+  }
+
+  .bad-cell {
+    background-color: rgba(15, 76, 138, 0.452);
+  }
+}
