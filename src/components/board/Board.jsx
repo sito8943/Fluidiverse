@@ -15,18 +15,26 @@ import Cell from "../cell/Cell";
 
 const Board = (props) => {
   const { lx, ly, units } = props;
-  const { unitCardState, setUnitCardState } = useUnitCard();
+  const { setUnitCardState } = useUnitCard();
 
   const [board, setBoard] = useState(BoardGeneration(lx, ly));
   const [staticUnits, setStaticUnits] = useState([]);
 
   const existUnitIn = (y, x) => {
-    let unit = { value: 0 };
-    for (let i = 0; i < staticUnits.length && unit.value === 0; ++i)
+    let unit = { type: 0 };
+    for (let i = 0; i < staticUnits.length && unit.type === 0; ++i)
       if (staticUnits[i].x === x && staticUnits[i].y === y)
         unit = staticUnits[i];
     return unit;
   };
+
+  const showCard = (e) => {
+    let node = e.target;
+    if (node.nodeName.toLowerCase() === "img") node = node.parentNode;
+    setUnitCardState({ type: "show", id: node.name });
+  };
+
+  const hideCard = (e) => setUnitCardState({ type: "reset" });
 
   useEffect(() => {
     setBoard(BoardGeneration(lx, ly));
@@ -49,8 +57,7 @@ const Board = (props) => {
                   value={item}
                   unit={existUnitIn(index, jndex)}
                   key={`cell${jndex}`}
-                  onMouseEnter={} 
-                  onMouseLeave={}
+                  onClick={showCard}
                 />
               );
             })}

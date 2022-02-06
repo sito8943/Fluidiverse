@@ -1,19 +1,26 @@
 import * as React from "react";
 
-const UnitCard = React.createUnitCard();
+const UnitCard = React.createContext();
 
 const unitCardReducer = (unitCardState, action) => {
   switch (action.type) {
     case "reset":
       return {
+        visible: false,
         type: 0,
         img: "",
         name: "",
         description: "",
       };
+    case "show":
+      return {
+        id: action.id,
+        visible: true,
+      };
     case "set":
       return {
-        type: action.type,
+        visible: true,
+        type: action.typeA,
         img: action.img,
         name: action.name,
         description: action.description,
@@ -25,6 +32,7 @@ const unitCardReducer = (unitCardState, action) => {
 
 const UnitCardProvider = ({ children }) => {
   const [unitCardState, setUnitCardState] = React.useReducer(unitCardReducer, {
+    visible: false,
     type: 0,
     img: "",
     name: "",
@@ -37,7 +45,7 @@ const UnitCardProvider = ({ children }) => {
 
 //hooks
 const useUnitCard = () => {
-  const unitCard = React.useUnitCard(UnitCard);
+  const unitCard = React.useContext(UnitCard);
   if (unitCard === undefined)
     throw new Error("useUnitCard must be used within a Provider");
   return unitCard;

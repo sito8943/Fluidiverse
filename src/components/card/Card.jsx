@@ -1,17 +1,17 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // style
 import "./style.scss";
 
-const Card = (props) => {
+const Card = forwardRef((props, ref) => {
   const { id, className, style, children } = props;
   return (
-    <div id={id} className={className} style={style}>
+    <div ref={ref} id={id} className={className} style={style}>
       {children}
     </div>
   );
-};
+});
 
 Card.defaultProps = {
   id: "",

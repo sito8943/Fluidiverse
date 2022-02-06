@@ -11,40 +11,69 @@ import p4 from "../../sprites/p4.gif";
 import dh1 from "../../sprites/dh1.gif";
 import st1 from "../../sprites/st1.gif";
 
+// context
+import { useUnitCard } from "../../context/UnitCard";
+
 // components
-import Card from "../../components/card/Card";
+import StaticUnitCard from "../../components/card/StaticUnitCard";
 
 // styles
 import "./style.scss";
 
 const units = [
   {
+    id: 0,
     type: 2,
     img: p1,
+    name: "Planeta 1",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
   },
   {
+    id: 1,
     type: 2,
     img: p2,
+    name: "Planeta 2",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
   },
   {
+    id: 2,
     type: 2,
     img: p3,
+    name: "Planeta 3",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
   },
   {
+    id: 3,
     type: 2,
     img: p4,
+    name: "Planeta 4",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
   },
   {
+    id: 4,
     type: 3,
     img: dh1,
+    name: "Planeta 5",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
   },
   {
+    id: 5,
     type: 4,
     img: st1,
+    name: "Planeta 6",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem velit esse laudantium minus veritatis delectus assumenda ipsa vero inventore quis quae, expedita ullam, deserunt iste. Voluptatum illo explicabo tempora debitis.",
   },
 ];
 
 const Main = (props) => {
+  const { unitCardState, setUnitCardState } = useUnitCard();
+
   const [steps, setSteps] = useState([]);
   const [planets, setPlanets] = useState([]);
   const [generated, setGenerated] = useState(false);
@@ -56,13 +85,21 @@ const Main = (props) => {
     units.forEach((item) => {
       const position = RandomPosition(10, 10);
       const { rx, ry } = position;
-      const { type, img } = item;
-      const newUnit = { type, img, x: rx, y: ry };
+      const { type, img, id } = item;
+      const newUnit = { id, type, img, x: rx, y: ry };
       worlds.push(newUnit);
     });
     setPlanets(worlds);
     setGenerated(true);
   };
+
+  useEffect(() => {
+    if (unitCardState.id) {
+      const { type, img, name, description } =
+        units[unitCardState.id.substring(1)];
+      setUnitCardState({ type: "set", typeA: type, img, name, description });
+    }
+  }, [unitCardState.visible]);
 
   useEffect(() => {
     if (playerPosition.rx) {
@@ -73,19 +110,7 @@ const Main = (props) => {
 
   return (
     <>
-      <Card className="card vertical absolute">
-        <img src={p1} alt="planeta1" />
-        <div>
-          <h3>Planeta 1</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad aut eum
-            obcaecati tempore voluptates facere blanditiis aliquid quam, officia
-            odit quibusdam consectetur maxime, illo ut labore numquam velit
-            minima deleniti.
-          </p>
-          <button className="button ghost ease-transition">Hola</button>
-        </div>
-      </Card>
+      {unitCardState.type ? <StaticUnitCard useCardContext /> : <></>}
       <div className="main-screen" style={{ display: "flex" }}>
         <div>
           <button onClick={generate}>Hola</button>
