@@ -35,7 +35,7 @@ const Cell = (props) => {
             {unit.type === 0 ? (
                 unit.type
             ) : (
-                <img className={unitsType[unit.type]} src={unit.img} alt={unit.name}/>
+                <img className={unitsTypeName[unit.type]} src={unit.img} alt={unit.name}/>
             )}
         </button>
     );

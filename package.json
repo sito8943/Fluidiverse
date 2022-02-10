@@ -57,5 +57,7 @@
     "auth",
     "react",
     "sass"
-  ]
+  ],
+  "devDependencies": {
+  }
 }

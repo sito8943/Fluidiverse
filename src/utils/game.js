@@ -70,6 +70,7 @@ export const FillWithStaticUnits = (lx, ly, board, units) => {
                     result = generateStar(lx, ly, newBoard);
                     break;
             }
+            newBoard[result.x][result.y] = result.type;
         }
     }
 }
@@ -81,7 +82,15 @@ export const FillWithStaticUnits = (lx, ly, board, units) => {
  * @param {number[][]} board
  */
 const generatePlanet = (lx, ly, board) => {
-
+    let position = {rx: 0, ry: 0};
+    let ready = false;
+    while (ready) {
+        position = RandomPosition(lx, ly);
+        ready = !FindTargets(board, [unitsTypeEnum.blackHole], position.rx, position.ry, 3, 3)
+        ready = !FindTargets(board, [unitsTypeEnum.planet, unitsTypeEnum.star], position.rx, position.ry, 2, 2)
+    }
+    position.type = unitsTypeEnum.planet;
+    return position;
 }
 
 /**
@@ -91,7 +100,15 @@ const generatePlanet = (lx, ly, board) => {
  * @param {number[][]} board
  */
 const generateStar = (lx, ly, board) => {
-
+    let position = {rx: 0, ry: 0};
+    let ready = false;
+    while (ready) {
+        position = RandomPosition(lx, ly);
+        ready = !FindTargets(board, [unitsTypeEnum.blackHole, unitsTypeEnum.star], position.rx, position.ry, 3, 3)
+        ready = !FindTargets(board, [unitsTypeEnum.planet], position.rx, position.ry, 2, 2)
+    }
+    position.type = unitsTypeEnum.star;
+    return position;
 }
 
 /**
@@ -99,9 +116,14 @@ const generateStar = (lx, ly, board) => {
  * @param {number} lx
  * @param {number} ly
  * @param {number[][]} board
+ * @return
  */
 const generateBlackHole = (lx, ly, board) => {
-
+    let position = RandomPosition(lx, ly);
+    while (FindTargets(board, [unitsTypeEnum.planet, unitsTypeEnum.blackHole, unitsTypeEnum.star], position.rx, position.ry, 4, 4))
+        position = RandomPosition(lx, ly);
+    position.type = unitsTypeEnum.blackHole
+    return position;
 }
 
 /**
@@ -112,26 +134,41 @@ const generateBlackHole = (lx, ly, board) => {
  * @param {number} sy
  * @param {number} mx
  * @param {number} my
-
  * @return
  */
-export const FindTargets = (board, targets, sx = 0, sy = 0, lx = 0, ly = 0) => {
+export const FindTargets = (board, targets, sx = 0, sy = 0, mx = 0, my = 0) => {
     // looking up
-    for (let i = my; i > -1; --i) {
-        if ()
-            }
+    for (let i = sy; i < my && i > 0; --i)
+        if (ThereIsA(targets, i, sx, board))
+            return true;
+    // looking right
+    for (let i = sx; i < mx && i < board[sy].length; ++i)
+        if (ThereIsA(targets, sy, i, board))
+            return true;
+    // looking down
+    for (let i = sy; i < my && i < board.length; ++i)
+        if (ThereIsA(targets, i, sx, board))
+            return true;
+    // looking left
+    for (let i = sx; i < mx && i > 0; --i)
+        if (ThereIsA(targets, sy, i, board))
+            return true;
 }
 
 /**
  *
- * @param {number} type
- * @param {number} x
+ * @param {number | number[]} type
  * @param {number} y
+ * @param {number} x
  * @param {number[][]} board
- * @constructor
+ * @return
  */
-export const ThereIsA = (type, x, y, board) => {
-    if (board[y][x] === type)
+export const ThereIsA = (type, y, x, board) => {
+    if (type.length) {
+        for (let i = 0; i < type.length; ++i)
+            if (board[y][x] === type)
+                return true;
+    } else if (board[y][x] === type)
         return true;
     return false
 }
