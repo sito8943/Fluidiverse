@@ -1,6 +1,5 @@
-# App-Template
-## React App Template
+# Fluidiverse
+
+## Bot planet simulators
 ### Brings
-- Login
-- SignUp
-- Forgot
+- Atomic bots simulation
