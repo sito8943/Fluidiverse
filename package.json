@@ -58,6 +58,5 @@
     "react",
     "sass"
   ],
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
