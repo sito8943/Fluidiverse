@@ -1,13 +1,23 @@
 .button {
   cursor: pointer;
+  padding: 5px 20px;
+  border-radius: 1rem;
 }
 
 .ghost {
-  padding: 5px 20px;
   border: 1px dashed aliceblue;
   background: none;
   color: aliceblue;
-  border-radius: 1rem;
+
+  &:hover {
+    background: aliceblue;
+    color: #222333;
+  }
+}
+
+.primary {
+  background: #222333;
+  color: aliceblue;
 
   &:hover {
     background: aliceblue;
