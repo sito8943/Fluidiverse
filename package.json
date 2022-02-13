@@ -50,9 +50,9 @@
   },
   "name": "app-template",
   "version": "1.0.0",
-  "description": "React App Template with: SignIn, Signup and Forgot",
+  "description": "Bot games",
   "main": "index.js",
-  "repository": "https://github.com/SitoNumbis/App-Template.git",
+  "repository": "https://github.com/SitoNumbis/Fluidiverse.git",
   "keywords": [
     "auth",
     "react",

@@ -1,23 +1,18 @@
 export default class InnerState {
-    constructor(next, innerState,) {
-        this.i = innerState;
-        this.next = next;
+    /**
+     *
+     * @param {string} name inner state name
+     */
+    constructor(name) {
+        this.i = name;
     }
 
-    get I() {
+    get Name() {
         return this.i;
     }
 
-    set I(innerState) {
-        this.i = innerState;
-    }
-
-    Next(perception) {
-        const innerState = this.next.filter((item) => {
-            if (item.P === perception)
-                return item.I;
-        })
-        return innerState[0];
+    set Name(name) {
+        this.i = name;
     }
 
 }

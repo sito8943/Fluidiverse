@@ -1,22 +1,27 @@
 export default class Perception {
-    constructor(state, perception) {
-        this.e = state;
-        this.p = perception
+    /**
+     *
+     * @param {string} environmentState environment state name
+     * @param {string} name perception name
+     */
+    constructor(environmentState, name) {
+        this.e = environmentState;
+        this.p = name;
     }
 
-    get P() {
+    get Name() {
         return this.p;
     }
 
-    set P(perception) {
-        this.p = perception;
+    set Name(name) {
+        this.p = name;
     }
 
-    get E() {
+    get EnvironmentState() {
         return this.e;
     }
 
-    set E(state) {
-        this.e = state;
+    set EnvironmentState(environmentState) {
+        this.e = environmentState;
     }
 }

@@ -1,23 +1,28 @@
 export default class Action {
-    constructor(innerState, action) {
+    /**
+     *
+     * @param {string} innerState state
+     * @param {string} name action name
+     */
+    constructor(innerState, name) {
         this.i = innerState;
-        this.a = action;
+        this.n = name;
     }
 
-    get I() {
+    get InnerState() {
         return this.i;
     }
 
-    set I(innerState) {
+    set InnerState(innerState) {
         this.i = innerState;
     }
 
-    get A() {
+    get Name() {
         return this.a;
     }
 
-    set A(action) {
-        this.a = action;
+    set Name(name) {
+        this.a = name;
     }
 
 }
