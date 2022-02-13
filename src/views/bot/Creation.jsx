@@ -10,7 +10,12 @@ import Action from "../../models/Action";
 import "./style.scss";
 
 const Creation = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const E = ["Nada", "Mineral"]; // environment states
   const P = [
     new Perception("Nada", "Nada"),
@@ -39,13 +44,19 @@ const Creation = () => {
 
   useEffect(() => {}, []);
 
+  const onSubmit = (data) => {
+    console.log(errors);
+  };
+
+  console.log(watch("environmentStates")); // watch input value by passing the name of it
+
   return (
     <div>
-      <form className="creation-form">
+      <form className="creation-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-card" style={{ width: 350 }}>
           <div className="form-input">
             <div className="form-legend">
-              <label for="environmentStates">Estados del ambiente</label>
+              <label htmlFor="environmentStates">Estados del ambiente</label>
             </div>
             <input
               id="environmentStates"
@@ -57,9 +68,12 @@ const Creation = () => {
             />
             <span className="tooltip-trigger">?</span>
           </div>
+          {errors.environmentStates && (
+            <span className="error-span">This field is required</span>
+          )}
           <div className="form-input">
             <div className="form-legend">
-              <label for="perceptions">Percepciones</label>
+              <label htmlFor="perceptions">Percepciones</label>
             </div>
             <input
               id="perceptions"
@@ -71,9 +85,12 @@ const Creation = () => {
             />
             <span className="tooltip-trigger">?</span>
           </div>
+          {errors.perceptions && (
+            <span className="error-span">This field is required</span>
+          )}
           <div className="form-input">
             <div className="form-legend">
-              <label for="innerStates">Estados internos</label>
+              <label htmlFor="innerStates">Estados internos</label>
             </div>
             <input
               id="innerStates"
@@ -85,9 +102,12 @@ const Creation = () => {
             />
             <span className="tooltip-trigger">?</span>
           </div>
+          {errors.innerStates && (
+            <span className="error-span">This field is required</span>
+          )}
           <div className="form-input">
             <div className="form-legend">
-              <label for="actions">Acciones</label>
+              <label htmlFor="actions">Acciones</label>
             </div>
             <input
               id="actions"
@@ -99,6 +119,9 @@ const Creation = () => {
             />
             <span className="tooltip-trigger">?</span>
           </div>
+          {errors.actions && (
+            <span className="error-span">This field is required</span>
+          )}
         </div>
         <div className="form-card">
           <div>
@@ -118,6 +141,7 @@ const Creation = () => {
             <div>Acción</div>
           </div>
         </div>
+        <input type="submit" />
       </form>
     </div>
   );
