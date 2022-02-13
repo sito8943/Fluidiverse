@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import ReactTooltip from "react-tooltip";
 
 import AtomicBot from "../../models/AtomicBot";
 import Perception from "../../models/Perception";
@@ -65,6 +66,13 @@ const Creation = () => {
   const errorsList = [
     "Campo requerido",
     "Estructura incorrecta, escribe palabras separadas por coma, no se admiten números",
+  ];
+
+  const tooltipsList = [
+    "Estados posibles que ocurren en el ambiente",
+    "Percepciones del bot a la hora de encontrarse con un estado del ambiente",
+    "Estados internos del bot que indican que está haciendo",
+    "Acciones que realiza el bot dependiendo de su estado interno",
   ];
 
   const MyBot = new AtomicBot(E, P, I, A, links, initial);
@@ -141,7 +149,9 @@ const Creation = () => {
                   pattern: /^([A-Za-z ]+,*)+$/,
                 })}
               />
-              <span className="tooltip-trigger">?</span>
+              <span className="tooltip-trigger" data-tip={tooltipsList[0]}>
+                ?
+              </span>
             </div>
             <span className="error-span">{environmentStatesError}</span>
             <div className="form-input">
@@ -156,7 +166,7 @@ const Creation = () => {
                   pattern: /^([A-Za-z ]+,*)+$/,
                 })}
               />
-              <span className="tooltip-trigger">?</span>
+              <span className="tooltip-trigger" data-tip={tooltipsList[1]}>?</span>
             </div>
             <span className="error-span">{perceptionsError}</span>
             <div className="form-input">
@@ -171,7 +181,9 @@ const Creation = () => {
                   pattern: /^([A-Za-z ]+,*)+$/,
                 })}
               />
-              <span className="tooltip-trigger">?</span>
+              <span className="tooltip-trigger" data-tip={tooltipsList[2]}>
+                ?
+              </span>
             </div>
             <span className="error-span">{innerStatesError}</span>
             <div className="form-input">
@@ -186,7 +198,9 @@ const Creation = () => {
                   pattern: /^([A-Za-z ]+,*)+$/,
                 })}
               />
-              <span className="tooltip-trigger">?</span>
+              <span className="tooltip-trigger" data-tip={tooltipsList[3]}>
+                ?
+              </span>
             </div>
             <span className="error-span">{actionsError}</span>
           </div>
@@ -264,6 +278,7 @@ const Creation = () => {
             </div>
           </div>
         </form>
+        <ReactTooltip />
         <input type="submit" className="button primary ease-transition" />
       </div>
     </div>
