@@ -1,10 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
+
+// contexts
 import { ContextProvider } from "./context/ContextProvider";
-import Creation from "./views/bot/Creation";
 import { UnitCardProvider } from "./context/UnitCard";
 import { RightSidebarProvider } from "./context/RightSidebarProvider";
+
+// views
+import Creation from "./views/bot/Creation";
+
+// styles
+import "./index.scss";
+import "./assets/theme.scss";
 
 ReactDOM.render(
   <React.StrictMode>

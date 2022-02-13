@@ -1,3 +1,9 @@
+input {
+  padding: 7px 10px;
+  border-radius: 1rem;
+  border: 1px solid #1d1d1d;
+}
+
 .creation-form {
   display: flex;
   flex-wrap: wrap;
@@ -13,9 +19,10 @@
     margin: 10px 0;
 
     input {
-      padding: 7px 10px;
-      border-radius: 1rem;
       width: 80%;
+
+      &:hover {
+      }
     }
   }
 
@@ -36,4 +43,13 @@
   color: aliceblue;
   border-radius: 1rem;
   cursor: pointer;
+
+  &:hover {
+    background-color: #1d1d1d55;
+  }
+}
+
+.flex-column {
+  display: flex;
+  justify-content: space-between;
 }

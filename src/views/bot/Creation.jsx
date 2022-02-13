@@ -9,11 +9,6 @@ import Action from "../../models/Action";
 // style
 import "./style.scss";
 
-const errors = [
-  "Campo requerido",
-  "Estructura incorrecta, escribe palabras separadas por coma",
-];
-
 const Creation = () => {
   const {
     register,
@@ -23,6 +18,13 @@ const Creation = () => {
   } = useForm();
 
   // states
+  // strings
+  const [environmentStatesString, setEnvironmentStatesString] = useState([]);
+  const [perceptionsString, setPerceptionsString] = useState([]);
+  const [innerStatesString, setInnerStatesString] = useState([]);
+  const [actionsString, setActionsString] = useState([]);
+
+  // arrays
   const [environmentStatesArray, setEnvironmentStatesArray] = useState([]);
   const [perceptionsArray, setPerceptionsArray] = useState([]);
   const [innerStatesArray, setInnerStatesArray] = useState([]);
@@ -60,6 +62,11 @@ const Creation = () => {
   };
   const initial = { i: I[0] };
 
+  const errorsList = [
+    "Campo requerido",
+    "Estructura incorrecta, escribe palabras separadas por coma, no se admiten números",
+  ];
+
   const MyBot = new AtomicBot(E, P, I, A, links, initial);
 
   useEffect(() => {}, []);
@@ -68,10 +75,11 @@ const Creation = () => {
 
   const validateInput = (input) => {
     if (input.length > 0) {
-      if (!input.match(/^([A-Za-z]+,*)+$/)) return errors[1];
+      console.log(input.match(/^([A-Za-z ]+,*)+$/));
+      if (input.match(/^([A-Za-z ]+,*)+$/) === null) return errorsList[1];
       else return "";
     }
-    return errors[0];
+    return errorsList[0];
   };
 
   const turnToArray = (input) => {
@@ -82,104 +90,182 @@ const Creation = () => {
   watch((item) => {
     const { environmentStates, perceptions, innerStates, actions } = item;
 
-    // validating
-    setEnvironmentStatesError(validateInput(environmentStates));
-    setPerceptionsError(validateInput(perceptions));
-    setInnerStatesError(validateInput(innerStates));
-    setActionsError(validateInput(actions));
+    if (environmentStates !== environmentStatesString) {
+      setEnvironmentStatesString(environmentStates);
+      console.log(validateInput(environmentStates));
+      setEnvironmentStatesError(validateInput(environmentStates));
+      setEnvironmentStatesArray(turnToArray(environmentStates));
+    }
 
-    // splitting
-    setEnvironmentStatesArray(turnToArray(environmentStates));
-    setPerceptionsArray(turnToArray(perceptions));
-    setInnerStatesArray(turnToArray(innerStates));
-    setActionsArray(turnToArray(actions));
+    if (perceptions !== perceptionsString) {
+      setPerceptionsString(perceptions);
+      setPerceptionsError(validateInput(perceptions));
+      setPerceptionsArray(turnToArray(perceptions));
+    }
+
+    if (innerStates !== innerStatesString) {
+      setInnerStatesString(innerStates);
+      setInnerStatesError(validateInput(innerStates));
+      setInnerStatesArray(turnToArray(innerStates));
+    }
+
+    if (actions !== actionsString) {
+      setActionsString(actions);
+      setActionsError(validateInput(actions));
+      setActionsArray(turnToArray(actions));
+    }
   });
 
   return (
-    <div>
-      <form className="creation-form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-card" style={{ width: 350 }}>
-          <div className="form-input">
-            <div className="form-legend">
-              <label htmlFor="environmentStates">Estados del ambiente:</label>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <div>
+        <form className="creation-form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-card" style={{ width: 350 }}>
+            <h3>Define los parámetros del bot</h3>
+            <div className="form-input">
+              <div className="form-legend">
+                <label htmlFor="environmentStates">Estados del ambiente:</label>
+              </div>
+              <input
+                id="environmentStates"
+                type="text"
+                {...register("environmentStates", {
+                  required: true,
+                  pattern: /^([A-Za-z ]+,*)+$/,
+                })}
+              />
+              <span className="tooltip-trigger">?</span>
             </div>
-            <input
-              id="environmentStates"
-              type="text"
-              {...register("environmentStates", {
-                required: true,
-                pattern: /^([A-Za-z]+,*)+$/,
-              })}
-            />
-            <span className="tooltip-trigger">?</span>
-          </div>
-          <span className="error-span">{environmentStatesError}</span>
-          <div className="form-input">
-            <div className="form-legend">
-              <label htmlFor="perceptions">Percepciones:</label>
+            <span className="error-span">{environmentStatesError}</span>
+            <div className="form-input">
+              <div className="form-legend">
+                <label htmlFor="perceptions">Percepciones:</label>
+              </div>
+              <input
+                id="perceptions"
+                type="text"
+                {...register("perceptions", {
+                  required: true,
+                  pattern: /^([A-Za-z ]+,*)+$/,
+                })}
+              />
+              <span className="tooltip-trigger">?</span>
             </div>
-            <input
-              id="perceptions"
-              type="text"
-              {...register("perceptions", {
-                required: true,
-                pattern: /^([A-Za-z]+,*)+$/,
-              })}
-            />
-            <span className="tooltip-trigger">?</span>
-          </div>
-          <span className="error-span">{perceptionsError}</span>
-          <div className="form-input">
-            <div className="form-legend">
-              <label htmlFor="innerStates">Estados internos:</label>
+            <span className="error-span">{perceptionsError}</span>
+            <div className="form-input">
+              <div className="form-legend">
+                <label htmlFor="innerStates">Estados internos:</label>
+              </div>
+              <input
+                id="innerStates"
+                type="text"
+                {...register("innerStates", {
+                  required: true,
+                  pattern: /^([A-Za-z ]+,*)+$/,
+                })}
+              />
+              <span className="tooltip-trigger">?</span>
             </div>
-            <input
-              id="innerStates"
-              type="text"
-              {...register("innerStates", {
-                required: true,
-                pattern: /^([A-Za-z]+,*)+$/,
-              })}
-            />
-            <span className="tooltip-trigger">?</span>
-          </div>
-          <span className="error-span">{innerStatesError}</span>
-          <div className="form-input">
-            <div className="form-legend">
-              <label htmlFor="actions">Acciones:</label>
+            <span className="error-span">{innerStatesError}</span>
+            <div className="form-input">
+              <div className="form-legend">
+                <label htmlFor="actions">Acciones:</label>
+              </div>
+              <input
+                id="actions"
+                type="text"
+                {...register("actions", {
+                  required: true,
+                  pattern: /^([A-Za-z ]+,*)+$/,
+                })}
+              />
+              <span className="tooltip-trigger">?</span>
             </div>
-            <input
-              id="actions"
-              type="text"
-              {...register("actions", {
-                required: true,
-                pattern: /^([A-Za-z]+,*)+$/,
-              })}
-            />
-            <span className="tooltip-trigger">?</span>
+            <span className="error-span">{actionsError}</span>
           </div>
-          <span className="error-span">{actionsError}</span>
-        </div>
-        <div className="form-card">
-          <div>
-            <h3>Enlaza percepciones con estados del ambiente</h3>
-            <div>Estados del ambiente</div>
-            <div>Percepciones</div>
+          <div className="form-card" style={{ width: 450 }}>
+            <div>
+              <h3>Enlaza percepciones con estados del ambiente</h3>
+              <div className="flex-column">
+                <div>
+                  Estados del ambiente
+                  <ul>
+                    {environmentStatesArray.map((item, i) => {
+                      return <li key={`eS${i}`}>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+                <div>
+                  Percepciones
+                  <ul>
+                    {perceptionsArray.map((item, i) => {
+                      return <li key={`eS${i}`}>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>Enlaza percepcionees y estados internos</h3>
+              <div className="flex-column">
+                <div>
+                  Estados internos
+                  <ul>
+                    {innerStatesArray.map((item, i) => {
+                      return <li key={`eS${i}`}>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+                <div>
+                  Percepciones
+                  <ul>
+                    {perceptionsArray.map((item, i) => {
+                      return <li key={`eS${i}`}>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+                <div>
+                  Estado interno resultado
+                  <ul>
+                    {innerStatesArray.map((item, i) => {
+                      return <li key={`eS${i}`}>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>Enlaza acciones con estados internos</h3>
+              <div className="flex-column">
+                <div>
+                  Estados internos
+                  <ul>
+                    {innerStatesArray.map((item, i) => {
+                      return <li key={`eS${i}`}>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+                <div>
+                  Acción
+                  <ul>
+                    {actionsArray.map((item, i) => {
+                      return <li key={`eS${i}`}>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3>Enlaza percepcionees y estados internos</h3>
-            <div>Percepciones</div>
-            <div>Estados internos</div>
-            <div>Estado interno resultado</div>
-          </div>
-          <div>
-            <h3>Enlaza acciones con estados internos</h3>
-            <div>Estados internos</div>
-            <div>Acción</div>
-          </div>
-        </div>
-        <input type="submit" />
-      </form>
+        </form>
+        <input type="submit" className="button primary ease-transition" />
+      </div>
     </div>
   );
 };

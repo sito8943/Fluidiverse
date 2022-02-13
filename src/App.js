@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { base64encode } from "nodejs-base64";
-import { useContext } from "./context/ContextProvider";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import User from "./models/User";
 
 import { GetTexts } from "./lang/texts";
 
+// contexts
+import { useContext } from "./context/ContextProvider";
+
+// components
 import Loading from "./components/loading/Loading";
 import Navbar from "./components/navbar/Navbar";
 
+// views
 import Login from "./views/login/Login";
 import Main from "./views/main/Main";
 
