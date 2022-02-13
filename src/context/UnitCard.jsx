@@ -16,7 +16,7 @@ const unitCardReducer = (unitCardState, action) => {
     case "hide":
       return {
         opacity: 0,
-        visible: unitCardState.visible,
+        visible: false,
         type: unitCardState.type,
         img: unitCardState.img,
         name: unitCardState.name,

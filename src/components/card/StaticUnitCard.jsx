@@ -8,9 +8,6 @@ import Card from "./Card";
 // context
 import { useUnitCard } from "../../context/UnitCard";
 
-// imgs
-import back from "../../sprites/SpaceBackground.png";
-
 // style
 import "./style.scss";
 import { XIcon } from "../../icons/icons";
@@ -60,9 +57,9 @@ const StaticUnitCard = (props) => {
 
   return (
     <Card
-      className="card vertical absolute ease-transition"
+      className="card vertical"
       style={{
-        backgroundImage: `url(${back})`,
+        backgroundColor: "#222333cc",
         opacity: unitCardState.opacity,
         zIndex: unitCardState.opacity ? 1 : -1,
       }}

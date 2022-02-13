@@ -5,12 +5,15 @@ import App from "./App";
 import { ContextProvider } from "./context/ContextProvider";
 import Main from "./views/main/Main";
 import { UnitCardProvider } from "./context/UnitCard";
+import { RightSidebarProvider } from "./context/RightSidebarProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <ContextProvider>
       <UnitCardProvider>
-        <Main />
+        <RightSidebarProvider>
+          <Main />
+        </RightSidebarProvider>
       </UnitCardProvider>
     </ContextProvider>
   </React.StrictMode>,

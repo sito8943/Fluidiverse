@@ -8,18 +8,25 @@
   }
 
   .good-cell {
-    background-color: rgba(30, 143, 255, 0.452);
+    background-color: rgba(30, 143, 255, 0.116);
   }
 
   .bad-cell {
-    background-color: rgba(15, 76, 138, 0.452);
+    background-color: rgba(15, 76, 138, 0.116);
   }
 
   .planet {
     width: 20px;
   }
-  .dark-hole,
+  .black-hole,
   .star {
     width: 40px;
+  }
+
+  .planet,
+  .black-hole,
+  .star,
+  .asteroid {
+    cursor: pointer;
   }
 }
