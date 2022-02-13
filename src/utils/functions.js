@@ -3,13 +3,15 @@
  * @param {number} from
  * @param {number} to
  */
- export const GenerateRandomNumber = (from, to) => {
+export const GenerateRandomNumber = (from, to) => {
   const ran = Math.floor(Math.random() * to + from);
   return ran;
 };
 
 /**
- * @param {string[]} list
+ * Get a random element from a list
+ * @param {string[]} list - The list of items to choose from.
+ * @returns A random item from the list.
  */
 export const GetRandomOf = (list) => {
   const ran = Math.random() * list.length;
