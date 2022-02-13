@@ -9,6 +9,11 @@ import Action from "../../models/Action";
 // style
 import "./style.scss";
 
+const errors = [
+  "Campo requerido",
+  "Estructura incorrecta, escribe palabras separadas por coma",
+];
+
 const Creation = () => {
   const {
     register,
@@ -16,6 +21,21 @@ const Creation = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  // states
+  const [environmentStatesArray, setEnvironmentStatesArray] = useState([]);
+  const [perceptionsArray, setPerceptionsArray] = useState([]);
+  const [innerStatesArray, setInnerStatesArray] = useState([]);
+  const [actionsArray, setActionsArray] = useState([]);
+
+  // !errors
+  const [environmentStatesError, setEnvironmentStatesError] = useState(
+    errors[0]
+  );
+  const [perceptionsError, setPerceptionsError] = useState(errors[0]);
+  const [innerStatesError, setInnerStatesError] = useState(errors[0]);
+  const [actionsError, setActionsError] = useState(errors[0]);
+
   const E = ["Nada", "Mineral"]; // environment states
   const P = [
     new Perception("Nada", "Nada"),
@@ -44,11 +64,36 @@ const Creation = () => {
 
   useEffect(() => {}, []);
 
-  const onSubmit = (data) => {
-    console.log(errors);
+  const onSubmit = (data) => {};
+
+  const validateInput = (input) => {
+    if (input.length > 0) {
+      if (!input.match(/^([A-Za-z]+,*)+$/)) return errors[1];
+      else return "";
+    }
+    return errors[0];
   };
 
-  console.log(watch("environmentStates")); // watch input value by passing the name of it
+  const turnToArray = (input) => {
+    const splitted = input.split(",");
+    return splitted;
+  };
+
+  watch((item) => {
+    const { environmentStates, perceptions, innerStates, actions } = item;
+
+    // validating
+    setEnvironmentStatesError(validateInput(environmentStates));
+    setPerceptionsError(validateInput(perceptions));
+    setInnerStatesError(validateInput(innerStates));
+    setActionsError(validateInput(actions));
+
+    // splitting
+    setEnvironmentStatesArray(turnToArray(environmentStates));
+    setPerceptionsArray(turnToArray(perceptions));
+    setInnerStatesArray(turnToArray(innerStates));
+    setActionsArray(turnToArray(actions));
+  });
 
   return (
     <div>
@@ -56,7 +101,7 @@ const Creation = () => {
         <div className="form-card" style={{ width: 350 }}>
           <div className="form-input">
             <div className="form-legend">
-              <label htmlFor="environmentStates">Estados del ambiente</label>
+              <label htmlFor="environmentStates">Estados del ambiente:</label>
             </div>
             <input
               id="environmentStates"
@@ -68,12 +113,10 @@ const Creation = () => {
             />
             <span className="tooltip-trigger">?</span>
           </div>
-          {errors.environmentStates && (
-            <span className="error-span">This field is required</span>
-          )}
+          <span className="error-span">{environmentStatesError}</span>
           <div className="form-input">
             <div className="form-legend">
-              <label htmlFor="perceptions">Percepciones</label>
+              <label htmlFor="perceptions">Percepciones:</label>
             </div>
             <input
               id="perceptions"
@@ -85,12 +128,10 @@ const Creation = () => {
             />
             <span className="tooltip-trigger">?</span>
           </div>
-          {errors.perceptions && (
-            <span className="error-span">This field is required</span>
-          )}
+          <span className="error-span">{perceptionsError}</span>
           <div className="form-input">
             <div className="form-legend">
-              <label htmlFor="innerStates">Estados internos</label>
+              <label htmlFor="innerStates">Estados internos:</label>
             </div>
             <input
               id="innerStates"
@@ -102,12 +143,10 @@ const Creation = () => {
             />
             <span className="tooltip-trigger">?</span>
           </div>
-          {errors.innerStates && (
-            <span className="error-span">This field is required</span>
-          )}
+          <span className="error-span">{innerStatesError}</span>
           <div className="form-input">
             <div className="form-legend">
-              <label htmlFor="actions">Acciones</label>
+              <label htmlFor="actions">Acciones:</label>
             </div>
             <input
               id="actions"
@@ -119,9 +158,7 @@ const Creation = () => {
             />
             <span className="tooltip-trigger">?</span>
           </div>
-          {errors.actions && (
-            <span className="error-span">This field is required</span>
-          )}
+          <span className="error-span">{actionsError}</span>
         </div>
         <div className="form-card">
           <div>
