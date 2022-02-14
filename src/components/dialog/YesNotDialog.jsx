@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 
 // styles
 import "./style.scss";
-import { CorrectIcon, InfoIcon, XIcon } from "../../icons/icons";
+import {
+  CorrectIcon,
+  ExclamationIcon,
+  InfoIcon,
+  XIcon,
+} from "../../icons/icons";
 
 export const DialogTypesEnum = {
   Warning: 0,
@@ -31,9 +36,17 @@ const YesNotDialog = (props) => {
   return (
     <div className="dialog ease-transition" style={{ opacity: shown ? 1 : 0 }}>
       <div className="flex align-center">
-        <CorrectIcon className="icon success" />
-        <InfoIcon className="icon information" />
-        <XIcon className="icon error" />
+        {type === DialogTypesEnum.Warning && (
+          <ExclamationIcon className="icon warning" />
+        )}
+        {type === DialogTypesEnum.Success && (
+          <CorrectIcon className="icon success" />
+        )}
+        {type === DialogTypesEnum.Information && (
+          <InfoIcon className="icon information" />
+        )}
+        {type === DialogTypesEnum.Error && <XIcon className="icon error" />}
+
         <h2>{DialogTypesNames[type]}</h2>
       </div>
       <h4>{text}</h4>
