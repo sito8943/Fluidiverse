@@ -103,10 +103,12 @@ const Creation = () => {
 
   const onSubmit = (data) => {};
 
-  const acceptDialog = () => {};
+  const acceptDialog = () => {
+    
+  };
 
   const cancelDialog = () => {
-    
+    setShowDialog(false);
   };
 
   const validateInput = (input) => {

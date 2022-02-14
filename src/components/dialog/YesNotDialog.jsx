@@ -34,7 +34,10 @@ const YesNotDialog = (props) => {
   }, [visible]);
 
   return (
-    <div className="dialog ease-transition" style={{ opacity: shown ? 1 : 0 }}>
+    <div
+      className="dialog ease-transition"
+      style={{ opacity: shown ? 1 : 0, zIndex: shown ? 1 : -1 }}
+    >
       <div className="flex align-center">
         {type === DialogTypesEnum.Warning && (
           <ExclamationIcon className="icon warning" />
