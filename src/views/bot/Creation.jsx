@@ -22,7 +22,7 @@ const Creation = () => {
   } = useForm();
 
   // states
-
+  const [showDialog, setShowDialog] = useState(false);
   // links
   const [eps, setEps] = useState([]); // environment state - perception
   const [ipis, setIpis] = useState([]); // inner state - perception - inner state
@@ -103,6 +103,12 @@ const Creation = () => {
 
   const onSubmit = (data) => {};
 
+  const acceptDialog = () => {};
+
+  const cancelDialog = () => {
+    
+  };
+
   const validateInput = (input) => {
     if (input.length > 0) {
       if (input.match(/^([A-Za-z ]+,*)+$/) === null) return errorsList[1];
@@ -174,6 +180,7 @@ const Creation = () => {
           }
         });
         if (exist.length > 0) {
+          setShowDialog(true);
         } else {
           // marking as previous linked button
           document.getElementById(pe).classList.remove("selected");
@@ -235,9 +242,9 @@ const Creation = () => {
         }
         accept={"Aceptar"}
         cancel={"Cancelar"}
-        onAccept={null}
-        onCancel={null}
-        visible={true}
+        onAccept={acceptDialog}
+        onCancel={cancelDialog}
+        visible={showDialog}
       />
       <div>
         <form className="creation-form" onSubmit={handleSubmit(onSubmit)}>
