@@ -43,174 +43,174 @@ import {
   BsFillBrightnessHighFill,
 } from "react-icons/bs";
 
-export const DarkModeIcon = () => {
-  return <BsFillMoonFill />;
+export const DarkModeIcon = (props) => {
+  return <BsFillMoonFill{...props} />;
 };
 
-export const LightModeIcon = () => {
-  return <BsFillBrightnessHighFill />;
+export const LightModeIcon = (props) => {
+  return <BsFillBrightnessHighFill{...props} />;
 };
 
-export const NotSentIcon = () => {
-  return <BsCircle />;
+export const NotSentIcon = (props) => {
+  return <BsCircle{...props} />;
 };
 
-export const SentIcon = () => {
-  return <BsCheckCircle />;
+export const SentIcon = (props) => {
+  return <BsCheckCircle{...props} />;
 };
 
-export const DontDisturbIcon = () => {
-  return <BsEarbuds />;
+export const DontDisturbIcon = (props) => {
+  return <BsEarbuds{...props} />;
 };
 
-export const IdleIcon = () => {
-  return <BsFillMoonFill />;
+export const IdleIcon = (props) => {
+  return <BsFillMoonFill{...props} />;
 };
 
-export const DotIcon = () => {
-  return <BsCircleFill />;
+export const DotIcon = (props) => {
+  return <BsCircleFill{...props} />;
 };
 
-export const MenuIcon = () => {
-  return <BsFillMenuButtonWideFill />;
+export const MenuIcon = (props) => {
+  return <BsFillMenuButtonWideFill{...props} />;
 };
 
-export const NotificationIcon = () => {
-  return <BsBellFill />;
+export const NotificationIcon = (props) => {
+  return <BsBellFill{...props} />;
 };
 
-export const ChatIcon = () => {
-  return <BsChatDotsFill />;
+export const ChatIcon = (props) => {
+  return <BsChatDotsFill{...props} />;
 };
 
-export const CorrectIcon = () => {
-  return <BsCheckCircleFill />;
+export const CorrectIcon = (props) => {
+  return <BsCheckCircleFill{...props} />;
 };
 
-export const ExploreIcon = () => {
-  return <BsCompassFill />;
+export const ExploreIcon = (props) => {
+  return <BsCompassFill{...props} />;
 };
 
-export const RemoveIcon = () => {
-  return <BsDashCircleFill />;
+export const RemoveIcon = (props) => {
+  return <BsDashCircleFill{...props} />;
 };
 
-export const SettingsIcon = () => {
-  return <BsGearFill />;
+export const SettingsIcon = (props) => {
+  return <BsGearFill{...props} />;
 };
 
-export const InfoIcon = () => {
-  return <BsInfoCircleFill />;
+export const InfoIcon = (props) => {
+  return <BsInfoCircleFill{...props} />;
 };
 
-export const SecureIcon = () => {
-  return <BsShieldLockFill />;
+export const SecureIcon = (props) => {
+  return <BsShieldLockFill{...props} />;
 };
 
-export const ToggleOffIcon = () => {
-  return <BsToggleOff />;
+export const ToggleOffIcon = (props) => {
+  return <BsToggleOff{...props} />;
 };
 
-export const ToggOnIcon = () => {
-  return <BsToggleOn />;
+export const ToggleOnIcon = (props) => {
+  return <BsToggleOn{...props} />;
 };
 
-export const XIcon = () => {
-  return <BsXCircleFill />;
+export const XIcon = (props) => {
+  return <BsXCircleFill{...props} />;
 };
 
-export const StarIcon = () => {
-  return <BsStarFill />;
+export const StarIcon = (props) => {
+  return <BsStarFill{...props} />;
 };
 
-export const QuestionIcon = () => {
-  return <BsQuestionCircleFill />;
+export const QuestionIcon = (props) => {
+  return <BsQuestionCircleFill{...props} />;
 };
 
-export const AngryEmojiIcon = () => {
-  return <BsFillEmojiAngryFill />;
+export const AngryEmojiIcon = (props) => {
+  return <BsFillEmojiAngryFill{...props} />;
 };
 
-export const DizzyEmojiIcon = () => {
-  return <BsFillEmojiDizzyFill />;
+export const DizzyEmojiIcon = (props) => {
+  return <BsFillEmojiDizzyFill{...props} />;
 };
 
-export const ExpressionlessEmojiIcon = () => {
-  return <BsFillEmojiExpressionlessFill />;
+export const ExpressionlessEmojiIcon = (props) => {
+  return <BsFillEmojiExpressionlessFill{...props} />;
 };
 
-export const FrownEmojiIcon = () => {
-  return <BsFillEmojiFrownFill />;
+export const FrownEmojiIcon = (props) => {
+  return <BsFillEmojiFrownFill{...props} />;
 };
 
-export const HeartEyesEmojiIcon = () => {
-  return <BsFillEmojiHeartEyesFill />;
+export const HeartEyesEmojiIcon = (props) => {
+  return <BsFillEmojiHeartEyesFill{...props} />;
 };
 
-export const LaughingEmojIcon = () => {
-  return <BsFillEmojiLaughingFill />;
+export const LaughingEmojIcon = (props) => {
+  return <BsFillEmojiLaughingFill{...props} />;
 };
 
-export const NeutralEmojiIcon = () => {
-  return <BsFillEmojiNeutralFill />;
+export const NeutralEmojiIcon = (props) => {
+  return <BsFillEmojiNeutralFill{...props} />;
 };
 
-export const SmileEmojiIcon = () => {
-  return <BsFillEmojiSmileFill />;
+export const SmileEmojiIcon = (props) => {
+  return <BsFillEmojiSmileFill{...props} />;
 };
 
-export const SmileUpsideDownEmojiIcon = () => {
-  return <BsFillEmojiSmileUpsideDownFill />;
+export const SmileUpsideDownEmojiIcon = (props) => {
+  return <BsFillEmojiSmileUpsideDownFill{...props} />;
 };
 
-export const SunglassesEmojiIcon = () => {
-  return <BsFillEmojiSunglassesFill />;
+export const SunglassesEmojiIcon = (props) => {
+  return <BsFillEmojiSunglassesFill{...props} />;
 };
 
-export const WinkEmojiIcon = () => {
-  return <BsFillEmojiWinkFill />;
+export const WinkEmojiIcon = (props) => {
+  return <BsFillEmojiWinkFill{...props} />;
 };
 
-export const WarningIcon = () => {
-  return <BsFillExclamationCircleFill />;
+export const WarningIcon = (props) => {
+  return <BsFillExclamationCircleFill{...props} />;
 };
 
-export const DownloadIcon = () => {
-  return <BsFillFileEarmarkArrowDownFill />;
+export const DownloadIcon = (props) => {
+  return <BsFillFileEarmarkArrowDownFill{...props} />;
 };
 
-export const UploadIcon = () => {
-  return <BsFillFileEarmarkArrowUpFill />;
+export const UploadIcon = (props) => {
+  return <BsFillFileEarmarkArrowUpFill{...props} />;
 };
 
-export const GroupIcon = () => {
-  return <BsFillPeopleFill />;
+export const GroupIcon = (props) => {
+  return <BsFillPeopleFill{...props} />;
 };
 
-export const PersonIcon = () => {
-  return <BsFillPersonFill />;
+export const PersonIcon = (props) => {
+  return <BsFillPersonFill{...props} />;
 };
 
-export const AddFriendIcon = () => {
-  return <BsFillPersonPlusFill />;
+export const AddFriendIcon = (props) => {
+  return <BsFillPersonPlusFill{...props} />;
 };
 
-export const DeleteFriendIcon = () => {
-  return <BsFillPersonXFill />;
+export const DeleteFriendIcon = (props) => {
+  return <BsFillPersonXFill{...props} />;
 };
 
-export const SendIcon = () => {
-  return <BsFillPlayFill />;
+export const SendIcon = (props) => {
+  return <BsFillPlayFill{...props} />;
 };
 
-export const NewChatIcon = () => {
-  return <BsFillPlusCircleFill />;
+export const NewChatIcon = (props) => {
+  return <BsFillPlusCircleFill{...props} />;
 };
 
-export const ShareIcon = () => {
-  return <BsFillShareFill />;
+export const ShareIcon = (props) => {
+  return <BsFillShareFill{...props} />;
 };
 
-export const BackspaceIcon = () => {
-  return <BsFillBackspaceFill />;
+export const BackspaceIcon = (props) => {
+  return <BsFillBackspaceFill{...props} />;
 };

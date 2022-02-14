@@ -18,6 +18,7 @@
 .primary {
   background: #222333;
   color: aliceblue;
+  border: 1px solid #1d1d1d;
 
   &:hover {
     background: aliceblue;
@@ -27,6 +28,14 @@
 
 .absolute {
   position: absolute !important;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.align-center {
+  align-items: center !important;
 }
 
 .ease-transition {

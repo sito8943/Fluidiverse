@@ -9,6 +9,9 @@ import Action from "../../models/Action";
 
 // style
 import "./style.scss";
+import YesNotDialog, {
+  DialogTypesEnum,
+} from "../../components/dialog/YesNotDialog";
 
 const Creation = () => {
   const {
@@ -171,7 +174,6 @@ const Creation = () => {
           }
         });
         if (exist.length > 0) {
-          
         } else {
           // marking as previous linked button
           document.getElementById(pe).classList.remove("selected");
@@ -226,6 +228,17 @@ const Creation = () => {
         height: "100vh",
       }}
     >
+      <YesNotDialog
+        type={DialogTypesEnum.Warning}
+        text={
+          "Estás seguro de anular el enlace del estado del ambiente seleccionado"
+        }
+        accept={"Aceptar"}
+        cancel={"Cancelar"}
+        onAccept={null}
+        onCancel={null}
+        visible={true}
+      />
       <div>
         <form className="creation-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-card" style={{ width: 350 }}>

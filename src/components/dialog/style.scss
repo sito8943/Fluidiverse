@@ -1,3 +1,48 @@
 .dialog {
   position: absolute;
+  width: 300px;
+  padding: 20px;
+  border-radius: 1rem;
+  background: #1d1d1dcc;
+  backdrop-filter: blur(4px);
+
+  .icon {
+    padding: 10px;
+    font-size: 2rem;
+    margin-top: 5px;
+  }
+
+  .success {
+    color: green;
+  }
+
+  .warning {
+    color: #ffcc00;
+  }
+
+  .information {
+    color: dodgerblue;
+  }
+
+  .error {
+    color: crimson;
+  }
+
+  h2 {
+    margin: 0;
+    color: aliceblue;
+  }
+
+  h4 {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .dialog-button-row {
+    display: flex;
+    justify-content: end;
+
+    button {
+      margin: 0 10px;
+    }
+  }
 }
