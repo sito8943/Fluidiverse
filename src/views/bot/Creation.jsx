@@ -19,6 +19,25 @@ const Creation = () => {
   } = useForm();
 
   // states
+
+  // links
+  const [eps, setEps] = useState([]); // environment state - perception
+  const [ipis, setIpis] = useState([]); // inner state - perception - inner state
+  const [ias, setIas] = useState([]); // innert state - action
+
+  // environment state - perception
+  const [ep, setEp] = useState("");
+  const [pe, setPe] = useState("");
+
+  // inner state - perception - inner state
+  const [ipi, setIpi] = useState("");
+  const [pii, setPii] = useState("");
+  const [iip, setIip] = useState("");
+
+  // innert state - action
+  const [ia, setIa] = useState("");
+  const [ai, setAi] = useState("");
+
   // strings
   const [environmentStatesString, setEnvironmentStatesString] = useState([]);
   const [perceptionsString, setPerceptionsString] = useState([]);
@@ -83,7 +102,6 @@ const Creation = () => {
 
   const validateInput = (input) => {
     if (input.length > 0) {
-      console.log(input.match(/^([A-Za-z ]+,*)+$/));
       if (input.match(/^([A-Za-z ]+,*)+$/) === null) return errorsList[1];
       else return "";
     }
@@ -95,34 +113,109 @@ const Creation = () => {
     return splitted;
   };
 
+  // watch bot parameters
   watch((item) => {
     const { environmentStates, perceptions, innerStates, actions } = item;
 
-    if (environmentStates !== environmentStatesString) {
+    if (
+      environmentStates !== environmentStatesString &&
+      environmentStates !== ""
+    ) {
       setEnvironmentStatesString(environmentStates);
-      console.log(validateInput(environmentStates));
       setEnvironmentStatesError(validateInput(environmentStates));
       setEnvironmentStatesArray(turnToArray(environmentStates));
     }
 
-    if (perceptions !== perceptionsString) {
+    if (perceptions !== perceptionsString && perceptions !== "") {
       setPerceptionsString(perceptions);
       setPerceptionsError(validateInput(perceptions));
       setPerceptionsArray(turnToArray(perceptions));
     }
 
-    if (innerStates !== innerStatesString) {
+    if (innerStates !== innerStatesString && innerStates !== "") {
       setInnerStatesString(innerStates);
       setInnerStatesError(validateInput(innerStates));
       setInnerStatesArray(turnToArray(innerStates));
     }
 
-    if (actions !== actionsString) {
+    if (actions !== actionsString && actions !== "") {
       setActionsString(actions);
       setActionsError(validateInput(actions));
       setActionsArray(turnToArray(actions));
     }
   });
+
+  const clickLinkerButton = (e) => {
+    if (e.target.classList.contains("un-linked")) {
+      e.target.classList.remove("un-linked");
+      e.target.classList.add("selected");
+    } else {
+      e.target.classList.add("un-linked");
+      e.target.classList.remove("selected");
+    }
+
+    const { id } = e.target;
+    if (id.indexOf("ep") === 0) {
+      if (ep !== "") {
+        // unselecting previous button
+        document.getElementById(ep).classList.add("un-linked");
+        document.getElementById(ep).classList.remove("selected");
+      }
+      // will be linked
+      else if (pe !== "") {
+        // if there is a previous link
+        // searching by ep
+        let exist = eps.filter((item) => {
+          if (item.e === id) {
+            return item;
+          }
+        });
+        if (exist.length > 0) {
+          
+        } else {
+          // marking as previous linked button
+          document.getElementById(pe).classList.remove("selected");
+          document.getElementById(pe).classList.add("linked");
+          // marking as linked current button
+          e.target.classList.remove("selected");
+          e.target.classList.add("linked");
+          // saving references
+          const newEps = eps;
+          newEps.push({ e: id, p: pe });
+          setEp("");
+          setPe("");
+          setEps(newEps);
+        }
+        return;
+      }
+      setEp(id);
+    }
+    if (id.indexOf("pe") === 0) {
+      if (pe !== "") {
+        // unselecting previous button
+        document.getElementById(pe).classList.add("un-linked");
+        document.getElementById(pe).classList.remove("selected");
+      }
+      // will be linked
+      else if (ep !== "") {
+        // marking as previous linked button
+        document.getElementById(ep).classList.remove("selected");
+        document.getElementById(ep).classList.add("linked");
+        // marking as linked current button
+        e.target.classList.remove("selected");
+        e.target.classList.add("linked");
+        // saving references
+        const newEps = eps;
+        newEps.push({ e: ep, p: id });
+        // removing references
+        setEp("");
+        setPe("");
+        setEps(newEps);
+        return;
+      }
+      setPe(id);
+    }
+  };
 
   return (
     <div
@@ -166,7 +259,9 @@ const Creation = () => {
                   pattern: /^([A-Za-z ]+,*)+$/,
                 })}
               />
-              <span className="tooltip-trigger" data-tip={tooltipsList[1]}>?</span>
+              <span className="tooltip-trigger" data-tip={tooltipsList[1]}>
+                ?
+              </span>
             </div>
             <span className="error-span">{perceptionsError}</span>
             <div className="form-input">
@@ -204,7 +299,7 @@ const Creation = () => {
             </div>
             <span className="error-span">{actionsError}</span>
           </div>
-          <div className="form-card" style={{ width: 450 }}>
+          <div className="form-card">
             <div>
               <h3>Enlaza percepciones con estados del ambiente</h3>
               <div className="flex-column">
@@ -212,7 +307,18 @@ const Creation = () => {
                   Estados del ambiente
                   <ul>
                     {environmentStatesArray.map((item, i) => {
-                      return <li key={`eS${i}`}>{item}</li>;
+                      return (
+                        <li key={`eS${i}`}>
+                          <button
+                            type="button"
+                            id={`ep${i}`}
+                            onClick={clickLinkerButton}
+                            className="ease-transition list-toggle-button un-linked"
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>
@@ -220,7 +326,18 @@ const Creation = () => {
                   Percepciones
                   <ul>
                     {perceptionsArray.map((item, i) => {
-                      return <li key={`eS${i}`}>{item}</li>;
+                      return (
+                        <li key={`eS${i}`}>
+                          <button
+                            type="button"
+                            id={`pe${i}`}
+                            onClick={clickLinkerButton}
+                            className="ease-transition list-toggle-button un-linked"
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>
@@ -233,7 +350,18 @@ const Creation = () => {
                   Estados internos
                   <ul>
                     {innerStatesArray.map((item, i) => {
-                      return <li key={`eS${i}`}>{item}</li>;
+                      return (
+                        <li key={`eS${i}`}>
+                          <button
+                            type="button"
+                            id={`ipi${i}`}
+                            onClick={clickLinkerButton}
+                            className="ease-transition list-toggle-button un-linked"
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>
@@ -241,7 +369,18 @@ const Creation = () => {
                   Percepciones
                   <ul>
                     {perceptionsArray.map((item, i) => {
-                      return <li key={`eS${i}`}>{item}</li>;
+                      return (
+                        <li key={`eS${i}`}>
+                          <button
+                            type="button"
+                            id={`pii${i}`}
+                            onClick={clickLinkerButton}
+                            className="ease-transition list-toggle-button un-linked"
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>
@@ -249,7 +388,18 @@ const Creation = () => {
                   Estado interno resultado
                   <ul>
                     {innerStatesArray.map((item, i) => {
-                      return <li key={`eS${i}`}>{item}</li>;
+                      return (
+                        <li key={`eS${i}`}>
+                          <button
+                            type="button"
+                            id={`iip${i}`}
+                            onClick={clickLinkerButton}
+                            className="ease-transition list-toggle-button un-linked"
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>
@@ -262,7 +412,18 @@ const Creation = () => {
                   Estados internos
                   <ul>
                     {innerStatesArray.map((item, i) => {
-                      return <li key={`eS${i}`}>{item}</li>;
+                      return (
+                        <li key={`eS${i}`}>
+                          <button
+                            type="button"
+                            id={`ia${i}`}
+                            onClick={clickLinkerButton}
+                            className="ease-transition list-toggle-button un-linked"
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>
@@ -270,7 +431,18 @@ const Creation = () => {
                   Acción
                   <ul>
                     {actionsArray.map((item, i) => {
-                      return <li key={`eS${i}`}>{item}</li>;
+                      return (
+                        <li key={`eS${i}`}>
+                          <button
+                            type="button"
+                            id={`ai${i}`}
+                            onClick={clickLinkerButton}
+                            className="ease-transition list-toggle-button un-linked"
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>
