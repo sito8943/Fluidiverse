@@ -33,19 +33,23 @@ export default class AtomicBot {
    * @return perception given an environment state
    */
   See = (e) => {
-    this.currenP = this.P.filter((item) => {
+    this.currentP = this.P.filter((item) => {
       if (item.EnvironmentState === e) return item;
     })[0];
-    return this.currenP.Name;
+    return this.currentP.Name;
   };
 
   /**
    * @param {Perception} p
    * @param {InnerState} i
    */
-  Next = (p, i = undefined) => {
-    if (!i) this.currentI = this.InnerStateLinks(p.Name, this.currentI.Name);
-    else this.currentI = this.InnerStateLinks(p.Name, i.Name);
+  Next = (p = undefined, i = undefined) => {
+    const cP = !p ? this.currentP : p;
+    const cI = !i ? this.currentI : i;
+    this.currentI = this.InnerStateLinks(cP.Name, cI.Name);
+    this.currentI = this.I.filter((item) => {
+      if (item.Name === this.currentI) return item;
+    })[0];
     return this.currentI.Name;
   };
 
@@ -54,10 +58,9 @@ export default class AtomicBot {
    * @return action given an inner state
    */
   Action = (i = undefined) => {
+    const cI = !i ? this.currentI : i;
     this.currentA = this.A.filter((item) => {
-      if (i) {
-        if (item.InnerState === i) return item;
-      } else if (item.InnerState === this.currentI.Name) return item;
+      if (item.InnerState === cI.Name) return item;
     })[0];
     return this.currentA.Name;
   };

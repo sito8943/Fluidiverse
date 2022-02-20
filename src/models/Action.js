@@ -30,7 +30,7 @@ export default class Action {
    * @returns The value of the property a.
    */
   get Name() {
-    return this.a;
+    return this.n;
   }
 
   /**
@@ -38,6 +38,6 @@ export default class Action {
    * @param {string} name - The name of the parameter.
    */
   set Name(name) {
-    this.a = name;
+    this.n = name;
   }
 }

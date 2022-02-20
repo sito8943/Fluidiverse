@@ -26,10 +26,16 @@ const links = {
     Nada: {
       next: "Buscando",
     },
+    Mineral: {
+      next: "Recogiendo",
+    },
   },
   Recogiendo: {
     Mineral: {
       next: "Recogiendo",
+    },
+    Nada: {
+      next: "Buscando",
     },
   },
 };
@@ -43,56 +49,76 @@ const RunningBot = () => {
 
   useEffect(() => {
     const ran = RandomPosition(10, 10);
-    setBotPosition(ran);
-    setBotPosition(ran);
+
     const boardCell = board.getCell(ran.ry, ran.rx);
-    console.log(ran);
-    console.log(bot.See(E[boardCell]));
-    /*setInterval(() => {
-      setTick(tick + 1);
-    }, 1000);*/
+    // seeing first environment state
+    bot.See(E[boardCell]);
+    // changing state
+    bot.Next();
+    // doing action
+    bot.Action();
+    setBotPosition(ran);
   }, []);
 
   useEffect(() => {
     if (tick > 0) {
-      console.log(botPosition);
       const move = RandomMove(botPosition, 10, 10);
       const boardCell = board.getCell(move.ry, move.rx);
-      console.log(move);
-      console.log(bot.See(E[boardCell]));
+      // seeing environment state
+      bot.See(E[boardCell]);
+      // changing state
+      bot.Next();
+      // doing action
+      bot.Action();
+      setBotPosition(move);
     }
   }, [tick]);
 
   return (
     <div>
-      <button
-        onClick={() => {
-          setTick(tick + 1);
-        }}
-      >
-        Hola
-      </button>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {board.Board.map((item, i) => {
-          return (
-            <div key={`d${i}`}>
-              {item.map((jtem, j) => {
-                return (
-                  <div
-                    style={{
-                      margin: "10px",
-                      border: "1px solid",
-                      padding: "10px",
-                    }}
-                    key={`j${j}`}
-                  >
-                    {jtem}
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+      <div>
+        <button
+          onClick={() => {
+            setTick(tick + 1);
+          }}
+        >
+          Hola
+        </button>
+        {botPosition !== 0 && (
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            {board.Board.map((item, i) => {
+              return (
+                <div key={`d${i}`}>
+                  {item.map((jtem, j) => {
+                    return (
+                      <div
+                        style={{
+                          margin: "10px",
+                          border: "1px solid",
+                          padding: "10px",
+                        }}
+                        key={`j${j}`}
+                      >
+                        {j === botPosition.rx && j === botPosition.ry
+                          ? "B"
+                          : jtem}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+      <div>
+        {botPosition !== 0 && (
+          <div>
+            {bot.currentP.Name}
+            {bot.currentI.Name}
+          </div>
+        )}
+        <div></div>
       </div>
     </div>
   );
