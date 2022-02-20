@@ -1,12 +1,19 @@
+export const ActionTypes = {
+  good: 1,
+  alert: 2,
+};
+
 export default class Action {
   /**
    *
    * @param {string} innerState state
    * @param {string} name action name
+   * @param {number} type action type
    */
-  constructor(innerState, name) {
+  constructor(innerState, name, type) {
     this.i = innerState;
     this.n = name;
+    this.t = type;
   }
 
   /**
@@ -39,5 +46,13 @@ export default class Action {
    */
   set Name(name) {
     this.n = name;
+  }
+
+  get Type() {
+    return this.t;
+  }
+
+  set Type(type) {
+    this.t = type;
   }
 }

@@ -15,7 +15,6 @@ export default class AtomicBot {
     this.A = A; // actions
     this.links = links; // links[i] => { string : {next: string} }
     this.currentI = initial.i;
-    this.Action();
   }
 
   /**
@@ -25,6 +24,8 @@ export default class AtomicBot {
    * @return next inner state given a perception and previous inner state
    */
   InnerStateLinks = (p, i) => {
+    console.log(i, p);
+    console.log(this.links);
     return this.links[i][p].next;
   };
 
@@ -36,6 +37,7 @@ export default class AtomicBot {
     this.currentP = this.P.filter((item) => {
       if (item.EnvironmentState === e) return item;
     })[0];
+    console.log(e);
     return this.currentP.Name;
   };
 
@@ -62,6 +64,6 @@ export default class AtomicBot {
     this.currentA = this.A.filter((item) => {
       if (item.InnerState === cI.Name) return item;
     })[0];
-    return this.currentA.Name;
+    return this.currentA;
   };
 }
