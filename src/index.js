@@ -8,6 +8,7 @@ import { RightSidebarProvider } from "./context/RightSidebarProvider";
 
 // views
 import Creation from "./views/bot/Creation";
+import RunningBot from "./views/bot/RunningBot";
 
 // styles
 import "./index.scss";
@@ -18,7 +19,7 @@ ReactDOM.render(
     <ContextProvider>
       <UnitCardProvider>
         <RightSidebarProvider>
-          <Creation />
+          <RunningBot />
         </RightSidebarProvider>
       </UnitCardProvider>
     </ContextProvider>

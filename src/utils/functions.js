@@ -4,8 +4,8 @@
  * @param {number} to
  */
 export const GenerateRandomNumber = (from, to) => {
-    const ran = Math.floor(Math.random() * to + from);
-    return ran;
+  const ran = Math.floor(Math.random() * to + from);
+  return ran;
 };
 
 /**
@@ -14,11 +14,8 @@ export const GenerateRandomNumber = (from, to) => {
  * @returns A random item from the list.
  */
 export const GetRandomOf = (list) => {
-    const ran = Math.random() * list.length;
-    console.log(list);
-    console.log(ran);
-    console.log(list[Math.floor(ran)]);
-    return list[Math.floor(ran)];
+  const ran = Math.random() * list.length;
+  return list[Math.floor(ran)];
 };
 
 /**
@@ -27,11 +24,11 @@ export const GetRandomOf = (list) => {
  * @param {object[]} otherUsers
  */
 export const LookUserByName = (name, otherUsers) => {
-    const result = otherUsers.filter((item) => {
-        if (item.Name === name) return item;
-    });
-    if (result.length > 0) return result[0];
-    return null;
+  const result = otherUsers.filter((item) => {
+    if (item.Name === name) return item;
+  });
+  if (result.length > 0) return result[0];
+  return null;
 };
 
 /**
@@ -48,10 +45,10 @@ export const LookUserByName = (name, otherUsers) => {
  *
  */
 export const compareDates = (date1, date2) => {
-    if (date1.getDate() === date2.getDate()) return 0;
-    //knowing if was yesterday (86'400'000 means a day in milliseconds)
-    if (date1.getMilliseconds() - date2.getMilliseconds() === 86400000) return 1;
-    return 2;
+  if (date1.getDate() === date2.getDate()) return 0;
+  //knowing if was yesterday (86'400'000 means a day in milliseconds)
+  if (date1.getMilliseconds() - date2.getMilliseconds() === 86400000) return 1;
+  return 2;
 };
 
 /**
@@ -60,18 +57,18 @@ export const compareDates = (date1, date2) => {
  * @param {date} messageDate
  */
 export const generateTextDate = (now, messageDate) => {
-    let date = "";
-    date += now.getHours() + " : " + now.getMinutes();
-    //knowing if was yesterday (86'400'000 means a day in milliseconds)
-    if (now.getMilliseconds() - messageDate.getMilliseconds() === 86400000)
-        date += " Yesterday";
-    else {
-        if (now.getDate() !== messageDate.getDate())
-            date += "/" + messageDate.getDate();
-        if (now.getMonth() !== messageDate.getMonth())
-            date += "/" + messageDate.getMonth();
-        if (now.getFullYear() !== messageDate.getFullYear())
-            date += "/" + messageDate.getFullYear();
-    }
-    return date;
+  let date = "";
+  date += now.getHours() + " : " + now.getMinutes();
+  //knowing if was yesterday (86'400'000 means a day in milliseconds)
+  if (now.getMilliseconds() - messageDate.getMilliseconds() === 86400000)
+    date += " Yesterday";
+  else {
+    if (now.getDate() !== messageDate.getDate())
+      date += "/" + messageDate.getDate();
+    if (now.getMonth() !== messageDate.getMonth())
+      date += "/" + messageDate.getMonth();
+    if (now.getFullYear() !== messageDate.getFullYear())
+      date += "/" + messageDate.getFullYear();
+  }
+  return date;
 };
