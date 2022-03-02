@@ -1,4 +1,7 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useReducer } from "react";
+
+// components
+import BotInfoCard from "../../components/card/BotInfoCard";
 
 // functions
 import { GenerateRandomNumber } from "../../utils/functions";
@@ -11,62 +14,52 @@ import InnerState, { InnerStateTypes } from "../../models/InnerState";
 import Action, { ActionTypes } from "../../models/Action";
 import BotBoard from "../../models/BotBoard";
 
-const E = ["Nada", "Mineral"]; // environment states
-const P = [
-  new Perception("Nada", "Nada"),
-  new Perception("Mineral", "Mineral"),
-]; // perceptions
-const I = [
-  new InnerState("Buscando", InnerStateTypes.search),
-  new InnerState("Recogiendo", InnerStateTypes.harvest),
-  new InnerState("Alerta", InnerStateTypes.alert),
-]; // inner states
-const A = [
-  new Action("Buscando", "Buscar", ActionTypes.good),
-  new Action("Recogiendo", "Recoger", ActionTypes.good),
-  new Action("Alerta", "Alerta", ActionTypes.alert),
-]; // actions
-const links = {
-  Buscando: {
-    Nada: {
-      next: "Buscando",
-    },
-    Mineral: {
-      next: "Recogiendo",
-    },
-    Alerta: {
-      next: "Alerta",
-    },
-  },
-  Recogiendo: {
-    Mineral: {
-      next: "Alerta",
-    },
-    Nada: {
-      next: "Buscando",
-    },
-    Alerta: {
-      next: "Alerta",
-    },
-  },
-  Alert: {
-    Nada: {
-      next: "Alerta",
-    },
-    Mineral: {
-      next: "Alerta",
-    },
-    Alerta: {
-      next: "Alerta",
-    },
-  },
-};
-const initial = { i: I[0] };
-const bot = new AtomicBot(E, P, I, A, links, initial);
-const board = new BotBoard(10, 10, E, [0, 0, 0, 0, 0, 0, 1, 1, 1, 1]);
+// assets
+import kalar from "../../assets/img/kalardesertSmall.png";
+
+// templates
+import { collector } from "./templates";
+
+const bot = collector;
+const board = new BotBoard(10, 10, bot.E, [0, 0, 0, 0, 0, 0, 1, 1, 1, 1]);
 
 const RunningBot = () => {
   const [botPosition, setBotPosition] = useState(0);
+
+  const botAttributesReducer = (currentState, toDo) => {
+    const { type, action, innerState, perception } = toDo;
+    switch (type) {
+      case "set-action":
+        return { ...currentState, action };
+      case "set-inner-state":
+        return { ...currentState, innerState };
+      case "set-perception":
+        return { ...currentState, perception };
+      case "reset":
+        // reset
+        return {
+          action: "",
+          innerState: "",
+          perception: "",
+        };
+      default:
+        // reset
+        return {
+          action,
+          innerState,
+          perception,
+        };
+    }
+  };
+
+  const [botStateAttributes, setBotStateAttributes] = useReducer(
+    botAttributesReducer,
+    {
+      action: "",
+      innerState: "",
+      perception: "",
+    }
+  );
   const [tick, setTick] = useState(0);
 
   const BotBoardView = useMemo(() => {
@@ -104,9 +97,16 @@ const RunningBot = () => {
     const ran = RandomPosition(10, 10);
     const boardCell = board.getCell(ran.ry, ran.rx);
     // seeing first environment state
-    bot.See(E[boardCell]);
+    bot.See(bot.E[boardCell]);
     // changing state
     bot.Next();
+    // updating states
+    setBotStateAttributes({
+      type: "change",
+      action: bot.Current("a"),
+      innerState: bot.Current("i"),
+      perception: bot.Current("p"),
+    });
     setBotPosition(ran);
   }, []);
 
@@ -122,15 +122,28 @@ const RunningBot = () => {
       const move = RandomMove(botPosition, 10, 10);
       const boardCell = board.getCell(move.ry, move.rx);
       // seeing environment state
-      bot.See(E[boardCell]);
+      bot.See(bot.E[boardCell]);
       // changing state
       bot.Next();
+      // updating states
+      setBotStateAttributes({
+        type: "change",
+        action: bot.Current("a"),
+        innerState: bot.Current("i"),
+        perception: bot.Current("p"),
+      });
       setBotPosition(move);
     }
   }, [tick]);
 
   return (
     <div>
+      <BotInfoCard
+        name="collector"
+        innerState={botStateAttributes.innerState}
+        perception={botStateAttributes.perception}
+        planet={kalar}
+      ></BotInfoCard>
       <div>
         <button
           onClick={() => {
