@@ -66,4 +66,34 @@ export default class AtomicBot {
     })[0];
     return this.currentA;
   };
+
+  get CurrentAction() {
+    return this.currentA;
+  }
+
+  get CurrentInnerState() {
+    return this.currentI;
+  }
+
+  get CurrentPerception() {
+    return this.currentP;
+  }
+
+  Current = (key) => {
+    const lowerCaseKey = key.toLowerCase();
+    switch (lowerCaseKey) {
+      case "a":
+      case "action":
+      case "currenta":
+      case "currentaction":
+        return this.currentA;
+      case "i":
+      case "innerstate":
+      case "currenti":
+      case "currentinnerstate":
+        return this.currentI;
+      default:
+        return this.currentP;
+    }
+  };
 }

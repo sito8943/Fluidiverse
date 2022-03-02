@@ -5,9 +5,14 @@ import PropTypes from "prop-types";
 import "./style.scss";
 
 const Card = forwardRef((props, ref) => {
-  const { id, className, style, children } = props;
+  const { id, className, style, orentation, children } = props;
   return (
-    <div ref={ref} id={id} className={className} style={style}>
+    <div
+      ref={ref}
+      id={id}
+      className={`card ${className} ${orentation}`}
+      style={style}
+    >
       {children}
     </div>
   );
@@ -15,7 +20,8 @@ const Card = forwardRef((props, ref) => {
 
 Card.defaultProps = {
   id: "",
-  className: "card vertical",
+  className: "",
+  orentation: "vertical",
   style: {},
   children: [],
 };
