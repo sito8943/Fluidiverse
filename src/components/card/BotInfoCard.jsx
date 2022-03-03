@@ -2,9 +2,6 @@ import React, { useEffect, useReducer } from "react";
 
 import PropTypes from "prop-types";
 
-// assests
-import spinning from "../../assets/img/spinnerReady.png";
-
 // styles
 import "./style.scss";
 
@@ -50,29 +47,7 @@ const BotInfoCard = (props) => {
       perception: perception.Name,
       planet,
     });
-  }, []);
-
-  useEffect(() => {
-    setCardState({ type: "set-name", name });
-  }, [name]);
-
-  useEffect(() => {
-    setCardState({
-      type: "set-inner-state",
-      innerState: innerState ? innerState.Name : "",
-    });
-  }, [innerState]);
-
-  useEffect(() => {
-    setCardState({
-      type: "set-perception",
-      perception: perception ? perception.Name : "",
-    });
-  }, [perception]);
-
-  useEffect(() => {
-    setCardState({ type: "set-planet", planet });
-  }, [planet]);
+  }, [name, innerState.Name, perception.Name, planet]);
 
   const texts = {
     Perception: "Percepción actual",

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo, useReducer } from "react";
 
 // components
 import BotInfoCard from "../../components/card/BotInfoCard";
+import UpperButton from "../../components/UpperButton/UpperButton";
 
 // functions
 import { GenerateRandomNumber } from "../../utils/functions";
@@ -19,6 +20,9 @@ import kalar from "../../assets/img/kalardesertSmall.png";
 
 // templates
 import { collector } from "./templates";
+
+// images
+import Map from "../../assets/ui/map.png";
 
 const bot = collector;
 const board = new BotBoard(10, 10, bot.E, [0, 0, 0, 0, 0, 0, 1, 1, 1, 1]);
@@ -168,6 +172,9 @@ const RunningBot = () => {
 
   return (
     <div>
+      <UpperButton>
+        <img src={Map} alt={"map"} />
+      </UpperButton>
       <BotInfoCard
         name="collector"
         innerState={botStateAttributes.innerState}

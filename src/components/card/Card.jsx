@@ -23,14 +23,13 @@ Card.defaultProps = {
   className: "",
   orentation: "vertical",
   style: {},
-  children: [],
 };
 
 Card.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
-  children: PropTypes.array,
+  children: PropTypes.element.isRequired,
 };
 
 export default Card;
