@@ -3,9 +3,9 @@ import React, { useEffect, useReducer } from "react";
 import PropTypes from "prop-types";
 
 // styles
-import "./style.scss";
+import "../style.scss";
 
-import Card from "./Card";
+import Card from "../Card";
 
 const BotInfoCard = (props) => {
   const { name, innerState, perception, planet } = props;

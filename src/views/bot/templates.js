@@ -1,7 +1,7 @@
-import AtomicBot from "../../models/AtomicBot";
-import Perception, { Perceptions } from "../../models/Perception";
-import InnerState, { InnerStateTypes } from "../../models/InnerState";
-import Action, { ActionTypes } from "../../models/Action";
+import AtomicBot from "../../models/Bot/AtomicBot";
+import Perception, { Perceptions } from "../../models/Bot/Perception";
+import InnerState, { InnerStateTypes } from "../../models/Bot/InnerState";
+import Action, { ActionTypes } from "../../models/Bot/Action";
 
 export const collector = new AtomicBot(
   ["Nada", "Mineral"], // environment states

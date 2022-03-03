@@ -3,14 +3,14 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import PropTypes from "prop-types";
 
 // components
-import Card from "./Card";
+import Card from "../Card";
 
 // context
-import { useUnitCard } from "../../context/UnitCard";
+import { useUnitCard } from "../../../context/UnitCard";
 
 // style
-import "./style.scss";
-import { XIcon } from "../../icons/icons";
+import "../style.scss";
+import { XIcon } from "../../../icons/icons";
 
 const StaticUnitCard = (props) => {
   const { type, img, name, description, useCardContext } = props;

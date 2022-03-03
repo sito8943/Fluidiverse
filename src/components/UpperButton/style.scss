@@ -3,10 +3,13 @@
   z-index: 1;
   background: none;
   border: none;
-  padding: 0;
+  padding: 5px;
+  background: #222333cc;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin: 10px;
 
   img {
-    margin: 5px;
     width: 48px;
     height: 48px;
 
@@ -15,4 +18,8 @@
       height: 58px;
     }
   }
+}
+
+.upper-right {
+  right: 0;
 }

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactTooltip from "react-tooltip";
 
-import AtomicBot from "../../models/AtomicBot";
-import Perception from "../../models/Perception";
-import InnerState from "../../models/InnerState";
-import Action from "../../models/Action";
+import AtomicBot from "../../models/Bot/AtomicBot";
+import Perception from "../../models/Bot/Perception";
+import InnerState from "../../models/Bot/InnerState";
+import Action from "../../models/Bot/Action";
 
 // style
 import "./style.scss";

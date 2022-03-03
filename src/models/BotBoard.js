@@ -42,8 +42,6 @@ export default class BotBoard {
    * @param {number} value new value
    */
   setCell = (row, column, value) => {
-    console.log(this.board[row][column]);
     this.board[row][column] = value;
-    console.log(this.board[row][column]);
   };
 }
