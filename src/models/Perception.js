@@ -1,12 +1,18 @@
+export const Perceptions = {
+  nothing: 1,
+  mineral: 2,
+};
+
 export default class Perception {
   /**
    *
    * @param {string} environmentState environment state name
    * @param {string} name perception name
    */
-  constructor(environmentState, name) {
+  constructor(environmentState, name, type) {
     this.e = environmentState;
     this.p = name;
+    this.t = type;
   }
 
   /**
@@ -39,5 +45,13 @@ export default class Perception {
    */
   set EnvironmentState(environmentState) {
     this.e = environmentState;
+  }
+
+  get Type() {
+    return this.t;
+  }
+
+  set Type(type) {
+    this.t = type;
   }
 }

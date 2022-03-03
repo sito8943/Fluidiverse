@@ -62,6 +62,25 @@ const RunningBot = () => {
   );
   const [tick, setTick] = useState(0);
 
+  const playerBagReducer = (currentBag, toDo) => {
+    const { mineral, action, count } = toDo;
+    const newBag = currentBag;
+
+    switch (action) {
+      case "add":
+        newBag[mineral] += count;
+        break;
+      case "remove":
+        newBag[mineral] += count;
+        break;
+      default:
+        //reset
+        return {};
+    }
+    return newBag;
+  };
+  const [playerBag, setPlayerBag] = useReducer(playerBagReducer, {});
+
   const BotBoardView = useMemo(() => {
     return (
       <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -108,19 +127,29 @@ const RunningBot = () => {
       perception: bot.Current("p"),
     });
     setBotPosition(ran);
+
+    const timer = setInterval(() => {
+      setTick((prevTick) => prevTick + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
-    if (tick > 0) {
+    if (tick > 10) {
       // finish action
       const action = bot.Action();
       if (
         bot.currentI.Type === InnerStateTypes.harvest &&
         action.Type === ActionTypes.good
-      )
+      ) {
         board.setCell(botPosition.ry, botPosition.rx, 0);
+        setPlayerBag({ type: "add", mineral: "iron", count: 1 });
+      }
+
       const move = RandomMove(botPosition, 10, 10);
       const boardCell = board.getCell(move.ry, move.rx);
+      // if the last cell was a mineral
       // seeing environment state
       bot.See(bot.E[boardCell]);
       // changing state
@@ -133,6 +162,7 @@ const RunningBot = () => {
         perception: bot.Current("p"),
       });
       setBotPosition(move);
+      setTick(0);
     }
   }, [tick]);
 

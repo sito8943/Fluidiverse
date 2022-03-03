@@ -80,18 +80,26 @@ const BotInfoCard = (props) => {
   };
 
   return (
-    <Card orentation="horizontal bot-info-card">
-      <div className="flex">
-        <div style={{ backgroundImage: planet }}>
-          <img src={cardState.planet} alt={"innerState"} />
+    <div className="container">
+      <Card orentation="horizontal bot-info-card">
+        <div className="flex">
+          <div style={{ backgroundImage: planet }}>
+            <img src={cardState.planet} alt={"innerState"} />
+          </div>
+          <div>
+            <h3>{cardState.name}</h3>
+            <p>
+              {`${texts["Perception"]}: `}
+              <span>{`${cardState.perception}`}</span>
+            </p>
+            <p>
+              {`${texts["InnerState"]}: `}
+              <span>{`${cardState.innerState}`}</span>
+            </p>
+          </div>
         </div>
-        <div>
-          <h3>{cardState.name}</h3>
-          <p>{`${texts["Perception"]}: '} <span>{`${cardState.perception}`}</span></p>
-          <p>{`${texts["InnerState"]}: ${cardState.innerState}`}</p>
-        </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
 

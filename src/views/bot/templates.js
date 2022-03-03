@@ -1,11 +1,14 @@
 import AtomicBot from "../../models/AtomicBot";
-import Perception from "../../models/Perception";
+import Perception, { Perceptions } from "../../models/Perception";
 import InnerState, { InnerStateTypes } from "../../models/InnerState";
 import Action, { ActionTypes } from "../../models/Action";
 
 export const collector = new AtomicBot(
   ["Nada", "Mineral"], // environment states
-  [new Perception("Nada", "Nada"), new Perception("Mineral", "Mineral")], // perceptions
+  [
+    new Perception("Nada", "Nada", Perceptions.nothing),
+    new Perception("Mineral", "Mineral", Perceptions.mineral),
+  ], // perceptions
   [
     new InnerState("Buscando", InnerStateTypes.search),
     new InnerState("Recogiendo", InnerStateTypes.harvest),
@@ -30,7 +33,7 @@ export const collector = new AtomicBot(
     },
     Recogiendo: {
       Mineral: {
-        next: "Alerta",
+        next: "Recogiendo",
       },
       Nada: {
         next: "Buscando",
@@ -39,7 +42,7 @@ export const collector = new AtomicBot(
         next: "Alerta",
       },
     },
-    Alert: {
+    Alerta: {
       Nada: {
         next: "Alerta",
       },
