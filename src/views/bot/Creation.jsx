@@ -11,7 +11,7 @@ import Action from "../../models/Bot/Action";
 import "./style.scss";
 import YesNotDialog, {
   DialogTypesEnum,
-} from "../../components/dialog/YesNotDialog";
+} from "../../components/Dialog/YesNotDialog";
 
 const Creation = () => {
   const {
@@ -103,9 +103,7 @@ const Creation = () => {
 
   const onSubmit = (data) => {};
 
-  const acceptDialog = () => {
-    
-  };
+  const acceptDialog = () => {};
 
   const cancelDialog = () => {
     setShowDialog(false);
@@ -156,7 +154,8 @@ const Creation = () => {
     }
   });
 
-  const clickLinkerButton = (e) => {
+  const clickEPLinkerButton = (e) => {
+    console.log(eps);
     if (e.target.classList.contains("un-linked")) {
       e.target.classList.remove("un-linked");
       e.target.classList.add("selected");
@@ -227,6 +226,10 @@ const Creation = () => {
       setPe(id);
     }
   };
+
+  const clickPIILinkerButton = () => {};
+
+  const clickAILinkerButton = () => {};
 
   return (
     <div
@@ -334,7 +337,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ep${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickEPLinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -353,7 +356,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`pe${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickEPLinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -377,7 +380,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ipi${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickPIILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -396,7 +399,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`pii${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickPIILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -415,7 +418,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`iip${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickPIILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -439,7 +442,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ia${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickAILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -458,7 +461,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ai${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickAILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
