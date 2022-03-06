@@ -1,0 +1,25 @@
+.upper-button {
+  position: absolute;
+  z-index: 1;
+  background: none;
+  border: none;
+  padding: 5px;
+  background: #222333cc;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin: 10px;
+
+  img {
+    width: 48px;
+    height: 48px;
+
+    &:hover {
+      width: 58px;
+      height: 58px;
+    }
+  }
+}
+
+.upper-right {
+  right: 0;
+}

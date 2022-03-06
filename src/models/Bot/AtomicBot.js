@@ -9,6 +9,7 @@ export default class AtomicBot {
    * @param {{i: InnerState}} initial
    */
   constructor(E, P, I, A, links, initial) {
+    console.log(P);
     this.E = E; // environment states
     this.P = P; // perceptions
     this.I = I; // inner states

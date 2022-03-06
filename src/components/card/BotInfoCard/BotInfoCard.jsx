@@ -2,13 +2,10 @@ import React, { useEffect, useReducer } from "react";
 
 import PropTypes from "prop-types";
 
-// assests
-import spinning from "../../assets/img/spinnerReady.png";
-
 // styles
-import "./style.scss";
+import "../style.scss";
 
-import Card from "./Card";
+import Card from "../Card";
 
 const BotInfoCard = (props) => {
   const { name, innerState, perception, planet } = props;
@@ -50,29 +47,7 @@ const BotInfoCard = (props) => {
       perception: perception.Name,
       planet,
     });
-  }, []);
-
-  useEffect(() => {
-    setCardState({ type: "set-name", name });
-  }, [name]);
-
-  useEffect(() => {
-    setCardState({
-      type: "set-inner-state",
-      innerState: innerState ? innerState.Name : "",
-    });
-  }, [innerState]);
-
-  useEffect(() => {
-    setCardState({
-      type: "set-perception",
-      perception: perception ? perception.Name : "",
-    });
-  }, [perception]);
-
-  useEffect(() => {
-    setCardState({ type: "set-planet", planet });
-  }, [planet]);
+  }, [name, innerState.Name, perception.Name, planet]);
 
   const texts = {
     Perception: "Percepción actual",
@@ -80,18 +55,26 @@ const BotInfoCard = (props) => {
   };
 
   return (
-    <Card orentation="horizontal bot-info-card">
-      <div className="flex">
-        <div style={{ backgroundImage: planet }}>
-          <img src={cardState.planet} alt={"innerState"} />
+    <div className="container">
+      <Card orentation="horizontal bot-info-card">
+        <div className="flex">
+          <div style={{ backgroundImage: planet }}>
+            <img src={cardState.planet} alt={"innerState"} />
+          </div>
+          <div>
+            <h3>{cardState.name}</h3>
+            <p>
+              {`${texts["Perception"]}: `}
+              <span>{`${cardState.perception}`}</span>
+            </p>
+            <p>
+              {`${texts["InnerState"]}: `}
+              <span>{`${cardState.innerState}`}</span>
+            </p>
+          </div>
         </div>
-        <div>
-          <h3>{cardState.name}</h3>
-          <p>{`${texts["Perception"]}: '} <span>{`${cardState.perception}`}</span></p>
-          <p>{`${texts["InnerState"]}: ${cardState.innerState}`}</p>
-        </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
 

@@ -31,7 +31,6 @@ Sidebar.defaultProps = {
   id: "",
   className: "sidebar absolute ease-transition",
   style: {},
-  children: [],
   orientation: "right",
 };
 
@@ -39,7 +38,7 @@ Sidebar.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
-  children: PropTypes.array,
+  children: PropTypes.element.isRequired,
   orientation: PropTypes.string,
 };
 

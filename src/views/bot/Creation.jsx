@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactTooltip from "react-tooltip";
 
-import AtomicBot from "../../models/AtomicBot";
-import Perception from "../../models/Perception";
-import InnerState from "../../models/InnerState";
-import Action from "../../models/Action";
+import AtomicBot from "../../models/Bot/AtomicBot";
+import Perception from "../../models/Bot/Perception";
+import InnerState from "../../models/Bot/InnerState";
+import Action from "../../models/Bot/Action";
+
+import CodeMode from "./CodeMode.jsx";
 
 // style
 import "./style.scss";
 import YesNotDialog, {
   DialogTypesEnum,
-} from "../../components/dialog/YesNotDialog";
+} from "../../components/Dialog/YesNotDialog";
 
 const Creation = () => {
   const {
@@ -103,9 +105,7 @@ const Creation = () => {
 
   const onSubmit = (data) => {};
 
-  const acceptDialog = () => {
-    
-  };
+  const acceptDialog = () => {};
 
   const cancelDialog = () => {
     setShowDialog(false);
@@ -156,7 +156,9 @@ const Creation = () => {
     }
   });
 
-  const clickLinkerButton = (e) => {
+  const clickEPLinkerButton = (e) => {
+    console.log(eps);
+    // kio = das; //desenlanzando e - p existente
     if (e.target.classList.contains("un-linked")) {
       e.target.classList.remove("un-linked");
       e.target.classList.add("selected");
@@ -227,6 +229,10 @@ const Creation = () => {
       setPe(id);
     }
   };
+
+  const clickPIILinkerButton = () => {};
+
+  const clickAILinkerButton = () => {};
 
   return (
     <div
@@ -321,7 +327,7 @@ const Creation = () => {
             </div>
             <span className="error-span">{actionsError}</span>
           </div>
-          <div className="form-card">
+          {/*<div className="form-card">
             <div>
               <h3>Enlaza percepciones con estados del ambiente</h3>
               <div className="flex-column">
@@ -334,7 +340,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ep${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickEPLinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -353,7 +359,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`pe${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickEPLinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -377,7 +383,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ipi${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickPIILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -396,7 +402,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`pii${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickPIILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -415,7 +421,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`iip${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickPIILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -439,7 +445,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ia${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickAILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -458,7 +464,7 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ai${i}`}
-                            onClick={clickLinkerButton}
+                            onClick={clickAILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -470,6 +476,9 @@ const Creation = () => {
                 </div>
               </div>
             </div>
+          </div>*/}
+          <div className="form-card">
+            <CodeMode />
           </div>
         </form>
         <ReactTooltip />

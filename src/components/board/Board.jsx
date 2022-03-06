@@ -11,7 +11,7 @@ import { useUnitCard } from "../../context/UnitCard";
 import "./style.scss";
 
 // components
-import Cell from "../cell/Cell";
+import Cell from "./Cell/Cell";
 
 const Board = (props) => {
   const { lx, ly, units } = props;

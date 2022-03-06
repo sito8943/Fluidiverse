@@ -2,7 +2,7 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-import {unitsTypeName} from "../../utils/game";
+import {unitsTypeName} from "../../../utils/game";
 
 // styles
 import "./style.scss";

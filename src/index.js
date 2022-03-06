@@ -19,7 +19,7 @@ ReactDOM.render(
     <ContextProvider>
       <UnitCardProvider>
         <RightSidebarProvider>
-          <RunningBot />
+          <Creation />
         </RightSidebarProvider>
       </UnitCardProvider>
     </ContextProvider>
