@@ -478,10 +478,6 @@ const Creation = () => {
             </div>
           </div>*/}
           <div className="form-card">
-<<<<<<< HEAD
-=======
-            <h3>Establece relaciones</h3>
->>>>>>> a034a9207347eb11a09fc554c56304d78e544f12
             <CodeMode />
           </div>
         </form>
