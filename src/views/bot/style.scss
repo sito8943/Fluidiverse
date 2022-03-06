@@ -16,7 +16,7 @@ ul {
   .list-toggle-button {
     width: 100%;
     border: none;
-    
+
     text-align: left;
     padding: 5px 10px;
     cursor: pointer;
@@ -58,6 +58,12 @@ ul {
     width: 100%;
     margin: 10px 0;
 
+    textarea {
+      resize: none;
+      width: 100%;
+      height: 200px;
+    }
+
     input {
       width: 80%;
 
@@ -68,6 +74,9 @@ ul {
 
   .form-legend {
     margin: 10px 5px;
+    display: flex;
+    align-items: center;
+
   }
 
   .error-span {
@@ -79,7 +88,7 @@ ul {
 .tooltip-trigger {
   margin: 0px 4px;
   background-color: #1d1d1d64;
-  padding: 5px 10px;
+  padding: 5px 12px;
   color: aliceblue;
   border-radius: 1rem;
   cursor: pointer;
