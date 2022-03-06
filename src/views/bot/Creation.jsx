@@ -7,6 +7,8 @@ import Perception from "../../models/Bot/Perception";
 import InnerState from "../../models/Bot/InnerState";
 import Action from "../../models/Bot/Action";
 
+import CodeMode from "./CodeMode.jsx";
+
 // style
 import "./style.scss";
 import YesNotDialog, {
@@ -156,6 +158,7 @@ const Creation = () => {
 
   const clickEPLinkerButton = (e) => {
     console.log(eps);
+    // kio = das; //desenlanzando e - p existente
     if (e.target.classList.contains("un-linked")) {
       e.target.classList.remove("un-linked");
       e.target.classList.add("selected");
@@ -324,7 +327,7 @@ const Creation = () => {
             </div>
             <span className="error-span">{actionsError}</span>
           </div>
-          <div className="form-card">
+          {/*<div className="form-card">
             <div>
               <h3>Enlaza percepciones con estados del ambiente</h3>
               <div className="flex-column">
@@ -473,6 +476,9 @@ const Creation = () => {
                 </div>
               </div>
             </div>
+          </div>*/}
+          <div className="form-card">
+            <CodeMode />
           </div>
         </form>
         <ReactTooltip />
