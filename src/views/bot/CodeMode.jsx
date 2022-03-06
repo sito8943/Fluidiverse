@@ -33,7 +33,11 @@ const CodeMode = () => {
           ?
         </span>
       </div>
-      <textarea value={seeInput} onChange={setSeeInput} required />
+      <textarea
+        value={seeInput}
+        onChange={(e) => setSeeInput(e.target.value)}
+        required
+      />
       <span className="error-span">{perceptionsError}</span>
     </div>
   );
@@ -49,7 +53,10 @@ const CodeMode = () => {
           ?
         </span>
       </div>
-      <textarea value={nextInput} onChange={setNextInput} />
+      <textarea
+        value={nextInput}
+        onChange={(e) => setNextInput(e.target.value)}
+      />
 
       <span className="error-span">{innerStatesError}</span>
     </div>
@@ -66,11 +73,15 @@ const CodeMode = () => {
           ?
         </span>
       </div>
-      <textarea value={actionInput} onChange={setActionInput} />
+      <textarea
+        value={actionInput}
+        onChange={(e) => setActionInput(e.target.value)}
+      />
 
       <span className="error-span">{actionsError}</span>
     </div>
   );
+  
   return (
     <div>
       <TabView
