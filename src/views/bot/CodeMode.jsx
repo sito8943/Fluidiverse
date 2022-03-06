@@ -26,13 +26,13 @@ const CodeMode = () => {
     const { id, value } = e.target;
     switch (id) {
       case "see":
-        console.log(Validate(value,RegEnums.see));
+        console.log(SyntaxValidator(value,RegEnums.see));
         return setSeeInput(value);
       case "next":
-        console.log(Validate(value,RegEnums.next));
+        console.log(SyntaxValidator(value,RegEnums.next));
         return setNextInput(value);
       default:
-        console.log(Validate(value,RegEnums.action));
+        console.log(SyntaxValidator(value,RegEnums.action));
         return setActionInput(value);
     }
   };
