@@ -15,6 +15,17 @@
   }
 }
 
+.alter-ghost {
+  border: 1px dashed #222333 !important;
+  background: none;
+  color: #222333 !important;
+
+  &:hover {
+    background: #222333 !important;
+    color: aliceblue !important;
+  }
+}
+
 .primary {
   background: #222333;
   color: aliceblue;
@@ -43,4 +54,8 @@
   * {
     transition: all 200ms ease !important;
   }
+}
+
+.small-margin {
+  margin: 10px !important;
 }

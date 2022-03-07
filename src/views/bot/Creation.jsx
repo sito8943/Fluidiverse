@@ -13,7 +13,7 @@ import CodeMode from "./CodeMode.jsx";
 import "./style.scss";
 import YesNotDialog, {
   DialogTypesEnum,
-} from "../../components/Dialog/YesNotDialog";
+} from "../../components/Dialog/YesNotDialog/YesNotDialog";
 
 const Creation = () => {
   const {
@@ -97,6 +97,9 @@ const Creation = () => {
     "Percepciones del bot a la hora de encontrarse con un estado del ambiente",
     "Estados internos del bot que indican que está haciendo",
     "Acciones que realiza el bot dependiendo de su estado interno",
+    "Función see(Ei) => Pj. Dado un estado del ambiente se obtiene una percepción",
+    "Función next(Ei, Pj) => Pw. Dado un estado interno y una percepción se optiene el próximo estado interno",
+    "Función action(Ei) => Aj. Dado un estado interno se obtiene una acción",
   ];
 
   const MyBot = new AtomicBot(E, P, I, A, links, initial);
@@ -230,9 +233,17 @@ const Creation = () => {
     }
   };
 
-  const clickPIILinkerButton = () => {};
+  const createSee = () => {
 
-  const clickAILinkerButton = () => {};
+  }
+
+  const createNext =() => {
+
+  }
+
+  const createAction = () => {
+
+  }
 
   return (
     <div
@@ -254,6 +265,7 @@ const Creation = () => {
         onCancel={cancelDialog}
         visible={showDialog}
       />
+      <CreationDialog />
       <div>
         <form className="creation-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-card" style={{ width: 350 }}>
@@ -327,7 +339,7 @@ const Creation = () => {
             </div>
             <span className="error-span">{actionsError}</span>
           </div>
-          {/*<div className="form-card">
+          <div className="form-card" style={{width: 450}}>
             <div>
               <h3>Enlaza percepciones con estados del ambiente</h3>
               <div className="flex-column">
@@ -340,7 +352,6 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ep${i}`}
-                            onClick={clickEPLinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -359,7 +370,6 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`pe${i}`}
-                            onClick={clickEPLinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -369,11 +379,6 @@ const Creation = () => {
                     })}
                   </ul>
                 </div>
-              </div>
-            </div>
-            <div>
-              <h3>Enlaza percepcionees y estados internos</h3>
-              <div className="flex-column">
                 <div>
                   Estados internos
                   <ul>
@@ -383,69 +388,6 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ipi${i}`}
-                            onClick={clickPIILinkerButton}
-                            className="ease-transition list-toggle-button un-linked"
-                          >
-                            {item}
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-                <div>
-                  Percepciones
-                  <ul>
-                    {perceptionsArray.map((item, i) => {
-                      return (
-                        <li key={`eS${i}`}>
-                          <button
-                            type="button"
-                            id={`pii${i}`}
-                            onClick={clickPIILinkerButton}
-                            className="ease-transition list-toggle-button un-linked"
-                          >
-                            {item}
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-                <div>
-                  Estado interno resultado
-                  <ul>
-                    {innerStatesArray.map((item, i) => {
-                      return (
-                        <li key={`eS${i}`}>
-                          <button
-                            type="button"
-                            id={`iip${i}`}
-                            onClick={clickPIILinkerButton}
-                            className="ease-transition list-toggle-button un-linked"
-                          >
-                            {item}
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3>Enlaza acciones con estados internos</h3>
-              <div className="flex-column">
-                <div>
-                  Estados internos
-                  <ul>
-                    {innerStatesArray.map((item, i) => {
-                      return (
-                        <li key={`eS${i}`}>
-                          <button
-                            type="button"
-                            id={`ia${i}`}
-                            onClick={clickAILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -464,7 +406,6 @@ const Creation = () => {
                           <button
                             type="button"
                             id={`ai${i}`}
-                            onClick={clickAILinkerButton}
                             className="ease-transition list-toggle-button un-linked"
                           >
                             {item}
@@ -476,11 +417,34 @@ const Creation = () => {
                 </div>
               </div>
             </div>
-          </div>*/}
+            <div className="flex align-center">
+              <h3>Función see(Ei) => Pj</h3>
+              <button type="button" className="button alter-ghost ghost small-margin" onClick={createSee}>Add</button>
+              <span className="tooltip-trigger" data-tip={tooltipsList[4]}>
+                ?
+              </span>
+            </div>
+            <div className="flex align-center">
+              <h3>Función next(Pj, Ei) => Ew</h3>
+              <button type="button" className="button alter-ghost ghost small-margin" onClick={createNext}>Add</button>
+              <span className="tooltip-trigger" data-tip={tooltipsList[5]}>
+                ?
+              </span>
+            </div>
+            <div className="flex align-center">
+              <h3>Función action(Ei) => Aj</h3>
+              <button type="button" className="button alter-ghost ghost small-margin" onClick={createAction}>Add</button>
+              <span className="tooltip-trigger" data-tip={tooltipsList[6]}>
+                ?
+              </span>
+            </div>
+          </div>
+          {/*
           <div className="form-card">
             <h3>Define las relaciones</h3>
             <CodeMode />
           </div>
+          */}
         </form>
         <ReactTooltip />
         <input type="submit" className="button primary ease-transition" />

@@ -1,16 +1,6 @@
 .tab-view {
   width: 400px;
   .tab-headers {
-    .ghost {
-      border: 1px dashed #222333 !important;
-      background: none;
-      color: #222333 !important;
-
-      &:hover {
-        background: #222333 !important;
-        color: aliceblue !important;
-      }
-    }
     button {
       margin: 0 10px 0 0;
     }
