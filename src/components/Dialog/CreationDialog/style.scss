@@ -1,0 +1,31 @@
+.creation-options {
+  display: flex;
+  margin: 10px 0;
+
+  .creation-option-column {
+    margin: 0 10px;
+
+    h5 {
+      color: aliceblue;
+      margin: 0;
+    }
+
+    button {
+      color: aliceblue;
+      border-color: aliceblue;
+    }
+
+    ul {
+      margin: 0;
+
+      li {
+        margin: 10px 0 0 0;
+      }
+
+      .linked {
+        background-color: darkgreen;
+        border: 1px solid rgb(2, 184, 2);
+      }
+    }
+  }
+}

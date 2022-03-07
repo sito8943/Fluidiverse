@@ -28,7 +28,7 @@ const Creation = () => {
   const [yesNotDialog, setYesNotDialog] = useState(false);
   const [creationDialog, setCreationDialog] = useState(false);
   const [creationType, setCreationType] = useState(0);
-  const [creatinoDialogOptions, setCreationDialogOptions] = useState([]);
+  const [creationDialogOptions, setCreationDialogOptions] = useState([]);
   // links
   const [eps, setEps] = useState([]); // environment state - perception
   const [ipis, setIpis] = useState([]); // inner state - perception - inner state
@@ -101,9 +101,9 @@ const Creation = () => {
     "Percepciones del bot a la hora de encontrarse con un estado del ambiente",
     "Estados internos del bot que indican que está haciendo",
     "Acciones que realiza el bot dependiendo de su estado interno",
-    "Función see(Ei) => Pj. Dado un estado del ambiente se obtiene una percepción",
-    "Función next(Ei, Pj) => Pw. Dado un estado interno y una percepción se optiene el próximo estado interno",
-    "Función action(Ei) => Aj. Dado un estado interno se obtiene una acción",
+    "Función see(Ei) => Pj. Dado un estado del ambiente se obtiene una percepción. Selecciona el estado del ambiente y su percepción correspondiente",
+    "Función next(Ei, Pj) => Pw. Dado un estado interno y una percepción se optiene el próximo estado interno. Selecciona el estado interno, la percepción y el estado interno resultado",
+    "Función action(Ei) => Aj. Dado un estado interno se obtiene una acción. Selecciona el estado interno y su acción correspondiente",
   ];
 
   const creationDialogTitles = [
@@ -198,15 +198,22 @@ const Creation = () => {
     const { id } = e.target;
     switch (id) {
       case "bNext":
-        options= createNext();
+        options = createNext();
+        setCreationType(0);
         break;
       case "bAction":
         options = createAction();
+        setCreationType(1);
         break;
       default:
         options = createSee();
+        setCreationType(2);
         break;
     }
+    console.log(creationType);
+    console.log(creationDialogTitles[creationType]);
+    console.log(creationDialogAccepts[creationType]);
+    console.log(options);
     setCreationDialogOptions(options);
     setCreationDialog(true);
   };
@@ -389,12 +396,12 @@ const Creation = () => {
               </div>
             </div>
             <div className="flex align-center">
-              <h3>Función see(Ei) => Pj</h3>
+              <h3>Función see(Ei) {"=>"} Pj</h3>
               <button
                 type="button"
                 id="bSee"
                 className="button alter-ghost ghost small-margin"
-                onClick={createSee}
+                onClick={activateCreationDialog}
               >
                 Add
               </button>
@@ -403,12 +410,12 @@ const Creation = () => {
               </span>
             </div>
             <div className="flex align-center">
-              <h3>Función next(Pj, Ei) => Ew</h3>
+              <h3>Función next(Pj, Ei) {"=>"} Ew</h3>
               <button
                 type="button"
                 id="bNext"
                 className="button alter-ghost ghost small-margin"
-                onClick={createNext}
+                onClick={activateCreationDialog}
               >
                 Add
               </button>
@@ -417,12 +424,12 @@ const Creation = () => {
               </span>
             </div>
             <div className="flex align-center">
-              <h3>Función action(Ei) => Aj</h3>
+              <h3>Función action(Ei) {"=>"} Aj</h3>
               <button
                 type="button"
                 id="bAction"
                 className="button alter-ghost ghost small-margin"
-                onClick={createAction}
+                onClick={activateCreationDialog}
               >
                 Add
               </button>
