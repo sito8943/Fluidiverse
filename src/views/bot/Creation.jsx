@@ -11,6 +11,7 @@ import CodeMode from "./CodeMode.jsx";
 
 // style
 import "./style.scss";
+import CreationDialog from "../../components/Dialog/CreationDialog/CreationDialog";
 import YesNotDialog, {
   DialogTypesEnum,
 } from "../../components/Dialog/YesNotDialog/YesNotDialog";
@@ -24,7 +25,10 @@ const Creation = () => {
   } = useForm();
 
   // states
-  const [showDialog, setShowDialog] = useState(false);
+  const [yesNotDialog, setYesNotDialog] = useState(false);
+  const [creationDialog, setCreationDialog] = useState(false);
+  const [creationType, setCreationType] = useState(0);
+  const [creatinoDialogOptions, setCreationDialogOptions] = useState([]);
   // links
   const [eps, setEps] = useState([]); // environment state - perception
   const [ipis, setIpis] = useState([]); // inner state - perception - inner state
@@ -102,6 +106,14 @@ const Creation = () => {
     "Función action(Ei) => Aj. Dado un estado interno se obtiene una acción",
   ];
 
+  const creationDialogTitles = [
+    tooltipsList[4],
+    tooltipsList[5],
+    tooltipsList[6],
+  ];
+
+  const creationDialogAccepts = [(e) => {}, (e) => {}, (e) => {}];
+
   const MyBot = new AtomicBot(E, P, I, A, links, initial);
 
   useEffect(() => {}, []);
@@ -111,7 +123,8 @@ const Creation = () => {
   const acceptDialog = () => {};
 
   const cancelDialog = () => {
-    setShowDialog(false);
+    setYesNotDialog(false);
+    setCreationDialog(false);
   };
 
   const validateInput = (input) => {
@@ -159,91 +172,44 @@ const Creation = () => {
     }
   });
 
-  const clickEPLinkerButton = (e) => {
-    console.log(eps);
-    // kio = das; //desenlanzando e - p existente
-    if (e.target.classList.contains("un-linked")) {
-      e.target.classList.remove("un-linked");
-      e.target.classList.add("selected");
-    } else {
-      e.target.classList.add("un-linked");
-      e.target.classList.remove("selected");
-    }
-
-    const { id } = e.target;
-    if (id.indexOf("ep") === 0) {
-      if (ep !== "") {
-        // unselecting previous button
-        document.getElementById(ep).classList.add("un-linked");
-        document.getElementById(ep).classList.remove("selected");
-      }
-      // will be linked
-      else if (pe !== "") {
-        // if there is a previous link
-        // searching by ep
-        let exist = eps.filter((item) => {
-          if (item.e === id) {
-            return item;
-          }
-        });
-        if (exist.length > 0) {
-          setShowDialog(true);
-        } else {
-          // marking as previous linked button
-          document.getElementById(pe).classList.remove("selected");
-          document.getElementById(pe).classList.add("linked");
-          // marking as linked current button
-          e.target.classList.remove("selected");
-          e.target.classList.add("linked");
-          // saving references
-          const newEps = eps;
-          newEps.push({ e: id, p: pe });
-          setEp("");
-          setPe("");
-          setEps(newEps);
-        }
-        return;
-      }
-      setEp(id);
-    }
-    if (id.indexOf("pe") === 0) {
-      if (pe !== "") {
-        // unselecting previous button
-        document.getElementById(pe).classList.add("un-linked");
-        document.getElementById(pe).classList.remove("selected");
-      }
-      // will be linked
-      else if (ep !== "") {
-        // marking as previous linked button
-        document.getElementById(ep).classList.remove("selected");
-        document.getElementById(ep).classList.add("linked");
-        // marking as linked current button
-        e.target.classList.remove("selected");
-        e.target.classList.add("linked");
-        // saving references
-        const newEps = eps;
-        newEps.push({ e: ep, p: id });
-        // removing references
-        setEp("");
-        setPe("");
-        setEps(newEps);
-        return;
-      }
-      setPe(id);
-    }
+  const createSee = () => {
+    return [
+      { key: "EnvironmentStates", list: environmentStatesArray },
+      { key: "Perceptions", list: perceptionsArray },
+    ];
   };
 
-  const createSee = () => {
-
-  }
-
-  const createNext =() => {
-
-  }
+  const createNext = () => {
+    return [
+      { key: "Perceptions", list: perceptionsArray },
+      { key: "InnerStates", list: innerStatesArray },
+    ];
+  };
 
   const createAction = () => {
+    return [
+      { key: "InnerStates", list: innerStatesArray },
+      { key: "Actions", list: actionsArray },
+    ];
+  };
 
-  }
+  const activateCreationDialog = (e) => {
+    let options = [];
+    const { id } = e.target;
+    switch (id) {
+      case "bNext":
+        options= createNext();
+        break;
+      case "bAction":
+        options = createAction();
+        break;
+      default:
+        options = createSee();
+        break;
+    }
+    setCreationDialogOptions(options);
+    setCreationDialog(true);
+  };
 
   return (
     <div
@@ -259,13 +225,18 @@ const Creation = () => {
         text={
           "Estás seguro de anular el enlace del estado del ambiente seleccionado"
         }
-        accept={"Aceptar"}
-        cancel={"Cancelar"}
         onAccept={acceptDialog}
         onCancel={cancelDialog}
-        visible={showDialog}
+        visible={yesNotDialog}
       />
-      <CreationDialog />
+      <CreationDialog
+        type={DialogTypesEnum.Information}
+        text={creationDialogTitles[creationType]}
+        options={creationDialogOptions}
+        visible={creationDialog}
+        onCancel={cancelDialog}
+        onAccept={creationDialogAccepts[creationType]}
+      />
       <div>
         <form className="creation-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-card" style={{ width: 350 }}>
@@ -339,7 +310,7 @@ const Creation = () => {
             </div>
             <span className="error-span">{actionsError}</span>
           </div>
-          <div className="form-card" style={{width: 450}}>
+          <div className="form-card" style={{ width: 450 }}>
             <div>
               <h3>Enlaza percepciones con estados del ambiente</h3>
               <div className="flex-column">
@@ -419,21 +390,42 @@ const Creation = () => {
             </div>
             <div className="flex align-center">
               <h3>Función see(Ei) => Pj</h3>
-              <button type="button" className="button alter-ghost ghost small-margin" onClick={createSee}>Add</button>
+              <button
+                type="button"
+                id="bSee"
+                className="button alter-ghost ghost small-margin"
+                onClick={createSee}
+              >
+                Add
+              </button>
               <span className="tooltip-trigger" data-tip={tooltipsList[4]}>
                 ?
               </span>
             </div>
             <div className="flex align-center">
               <h3>Función next(Pj, Ei) => Ew</h3>
-              <button type="button" className="button alter-ghost ghost small-margin" onClick={createNext}>Add</button>
+              <button
+                type="button"
+                id="bNext"
+                className="button alter-ghost ghost small-margin"
+                onClick={createNext}
+              >
+                Add
+              </button>
               <span className="tooltip-trigger" data-tip={tooltipsList[5]}>
                 ?
               </span>
             </div>
             <div className="flex align-center">
               <h3>Función action(Ei) => Aj</h3>
-              <button type="button" className="button alter-ghost ghost small-margin" onClick={createAction}>Add</button>
+              <button
+                type="button"
+                id="bAction"
+                className="button alter-ghost ghost small-margin"
+                onClick={createAction}
+              >
+                Add
+              </button>
               <span className="tooltip-trigger" data-tip={tooltipsList[6]}>
                 ?
               </span>

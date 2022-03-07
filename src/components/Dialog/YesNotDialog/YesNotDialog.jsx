@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // styles
-import "./style.scss";
+import "../style.scss";
 import {
   CorrectIcon,
   ExclamationIcon,
   InfoIcon,
   XIcon,
-} from "../../icons/icons";
+} from "../../../icons/icons";
 
 export const DialogTypesEnum = {
   Warning: 0,
@@ -75,15 +75,18 @@ const YesNotDialog = (props) => {
 
 YesNotDialog.defaultProps = {
   type: 0, // Warning
+  accept: "Aceptar",
+  cancel: "Cancelar",
 };
 
 YesNotDialog.propTypes = {
   type: PropTypes.number,
   text: PropTypes.string.isRequired,
-  accept: PropTypes.string.isRequired,
-  cancel: PropTypes.string.isRequired,
+  accept: PropTypes.string,
+  cancel: PropTypes.string,
   onAccept: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
 };
 
 export default YesNotDialog;

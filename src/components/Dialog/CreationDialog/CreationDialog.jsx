@@ -8,21 +8,11 @@ import {
   ExclamationIcon,
   InfoIcon,
   XIcon,
-} from "../../icons/icons";
-
-export const DialogTypesEnum = {
-  Warning: 0,
-  Error: 1,
-  Success: 2,
-  Information: 3,
-};
-
-export const DialogTypesNames = [
-  "Advertencia",
-  "Error",
-  "Éxito",
-  "Información",
-];
+} from "../../../icons/icons";
+import {
+  DialogTypesEnum,
+  DialogTypesNames,
+} from "../YesNotDialog/YesNotDialog";
 
 const CreationDialog = (props) => {
   const { text, accept, cancel, onAccept, onCancel, visible, type } = props;
