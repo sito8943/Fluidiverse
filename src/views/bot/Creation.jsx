@@ -112,7 +112,17 @@ const Creation = () => {
     tooltipsList[6],
   ];
 
-  const creationDialogAccepts = [(e) => {}, (e) => {}, (e) => {}];
+  const creationDialogAccepts = [
+    (selectedState) => {
+      console.log(selectedState);
+    },
+    (selectedState) => {
+      console.log(selectedState);
+    },
+    (selectedState) => {
+      console.log(selectedState);
+    },
+  ];
 
   const MyBot = new AtomicBot(E, P, I, A, links, initial);
 

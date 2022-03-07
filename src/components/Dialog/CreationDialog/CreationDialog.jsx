@@ -49,7 +49,10 @@ const CreationDialog = (props) => {
         .classList.remove("linked");
     setSelectedState({ type: "clicked", key, value });
     document.getElementById(id).classList.add("linked");
-    console.log(selectedState);
+  };
+
+  const action = () => {
+    onAccept(selectedState);
   };
 
   return (
@@ -97,7 +100,7 @@ const CreationDialog = (props) => {
         <button
           type="button"
           className="button primary ease-transition"
-          onClick={onAccept}
+          onClick={action}
         >
           {accept}
         </button>
